@@ -77,3 +77,5 @@ $route['products/insert'] = 'products/insert';
 $route['products/delete'] = 'products/delete/$1';
 $route['products/edit/(:any)'] = 'products/edit/$1';
 $route['products/update/(:any)'] = 'products/update/$1';
+//Orders
+$route['orders'] = 'orders/index';

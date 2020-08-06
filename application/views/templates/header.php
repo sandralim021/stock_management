@@ -86,8 +86,8 @@
       </li>
       <!-- Nav Item - Orders -->
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="fas fa-tag" aria-hidden="true"></i>
+        <a class="nav-link" href="<?php echo base_url() ?>orders">
+          <i class="fas fa-shopping-cart" aria-hidden="true"></i>
           <span>Orders</span></a>
       </li>
 
