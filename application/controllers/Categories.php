@@ -5,12 +5,14 @@ class Categories extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-
         $this->load->model('CategoriesModel','c_model');
     }
 
 	public function index()
 	{
+        if(!$this->session->userdata('logged_in')){
+            redirect('login/index');
+        }
         $data['title'] = 'Categories';
         $this->load->view('templates/header',$data);
         $this->load->view('categories');

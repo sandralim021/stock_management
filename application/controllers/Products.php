@@ -10,6 +10,9 @@ class Products extends CI_Controller {
     }
 
 	public function index(){
+        if(!$this->session->userdata('logged_in')){
+            redirect('login/index');
+        }
         $data['title'] = "Products";
         $data['brands'] = $this->p_model->get_brands();
         $data['categories'] = $this->p_model->get_categories();
