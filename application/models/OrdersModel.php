@@ -6,7 +6,7 @@
             return $query->result_array();
         }
         public function insert_entry($data){
-            $insert = $this->db->insert('order_details', $data);
+            $insert = $this->db->insert_batch('order_details', $data);
             return ($insert == true) ? true : false;
         }
     }

@@ -15,13 +15,16 @@
             $this->load->view('templates/footer');
         }
         public function insert(){
-            for($count = 0; $count < count(array($this->input->post('product_name'))); $count++){
-                $data = array(
-                    'product_id' => $this->input->post('product_name')[$count],
-                    'qty' => $this->input->post('product_qty')[$count]
+            $product_id = $this->input->post('product_name');
+            $product_qty = $this->input->post('product_qty');
+            foreach ($product_id as $key => $item) 
+            {
+                $insert_data[] = array(
+                    'product_id'=> $item,
+                    'qty'=> $product_qty[$key]
                 );
             }
-            $create = $this->o_model->insert_entry($data);
+            $create = $this->o_model->insert_entry($insert_data);
             if($create == true){
                 echo 'ok';
             }
