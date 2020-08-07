@@ -80,4 +80,4 @@ $route['products/update/(:any)'] = 'products/update/$1';
 //Orders
 $route['orders'] = 'orders/index';
 $route['orders/insert'] = 'orders/insert';
-$route['orders/get_qty/(:any)'] = 'orders/get_qty/$1';
+$route['orders/qty_price/(:any)'] = 'orders/qty_price/$1';

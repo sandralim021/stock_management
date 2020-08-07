@@ -9,8 +9,8 @@
             $insert = $this->db->insert_batch('order_details', $data);
             return ($insert == true) ? true : false;
         }
-        public function get_qty($id){
-            $query = $this->db->select("qty")
+        public function qty_price($id){
+            $query = $this->db->select("qty,price")
                             ->from("products")
                             ->where("product_id",$id)
                             ->get();

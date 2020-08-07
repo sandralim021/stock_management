@@ -27,10 +27,11 @@
                 <span id="error"></span>
                 <table class="table table-bordered" id="item_table">
                     <tr>
-                        <th>Enter Product Name</th>
-                        <th>Total Qty</th>
-                        <th>Enter Quantity</th>
-                        <th><button type="button" name="add" 
+                        <th width="30%">Enter Product Name</th>
+                        <th width="15%">Total Qty</th>
+                        <th width="15%">Enter Quantity</th>
+                        <th width="15%">Price</th>
+                        <th width="5%"><button type="button" name="add" 
                         class="btn btn-success btn-sm add">
                         <span class="fas fa-plus-circle"></span></button></th>
                     </tr>
@@ -62,6 +63,7 @@
             html += '</select></td>';
             html += '<td><input type="text" class="form-control total_qty" name="total_qty" disabled></td>';
             html += '<td><input type="text" class="form-control product_qty" name="product_qty[]"></td>';
+            html += '<td><input type="text" class="form-control price" name="price" disabled></td>';
             html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove">';
             html += '<span class="fa fa-minus-circle"></span></button></td></tr>';
             $('#item_table').append(html);
@@ -74,10 +76,11 @@
             var val=$(this).val();
             $.ajax({
                 type: 'GET',
-                url: '<?php echo base_url() ?>orders/get_qty/'+val,
+                url: '<?php echo base_url() ?>orders/qty_price/'+val,
                 dataType: 'json',
                 success:function(data){
                     $('.total_qty').val(data.qty);
+                    $('.price').val(data.price);
                 }
             });
         });
