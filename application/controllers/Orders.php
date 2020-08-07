@@ -14,6 +14,10 @@
             $this->load->view('orders');
             $this->load->view('templates/footer');
         }
+        public function get_qty($id){
+            $data = $this->o_model->get_qty($id);
+            echo json_encode($data);
+        }
         public function insert(){
             $product_id = $this->input->post('product_name');
             $product_qty = $this->input->post('product_qty');
