@@ -68,6 +68,7 @@
             html += '<td><input type="text" class="form-control total_qty" name="total_qty[]" disabled></td>';
             html += '<td><input type="text" class="form-control product_qty" name="product_qty[]"></td>';
             html += '<td><input type="text" class="form-control price" name="price[]" disabled></td>';
+            html += '<input type="hidden" class="form-control total_price" name="total_price[]" value="0">';
             html += '<td id="display_price">Php 0</td>';
             html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove">';
             html += '<span class="fa fa-minus-circle"></span></button></td></tr>';
@@ -106,6 +107,7 @@
                 }else{
                    total_price = qty.val() * tr.find(".price").val();
                    tr.find("#display_price").html("Php "+total_price);
+                   tr.find(".total_price").val(total_price);
                 }
             }
             

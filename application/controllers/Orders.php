@@ -20,12 +20,14 @@
         }
         public function insert(){
             $product_id = $this->input->post('product_name');
+            $total_price = $this->input->post('total_price');
             $product_qty = $this->input->post('product_qty');
             foreach ($product_id as $key => $item) 
             {
                 $insert_data[] = array(
                     'product_id'=> $item,
-                    'qty'=> $product_qty[$key]
+                    'price' => $total_price[$key],
+                    'qty'=> $product_qty[$key],
                 );
             }
             $create = $this->o_model->insert_entry($insert_data);
