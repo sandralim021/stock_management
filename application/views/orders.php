@@ -10,21 +10,21 @@
         </div>
         <div class="card-body">
         <form id="insert_form">
+            <span id="error"></span>
             <div class="form-group row">
                 <label for="order_name" class="col-sm-2 col-form-label">Order Date</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="order_date">
+                    <input type="text" class="form-control" id="order_date" name="order_date">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="order_name" class="col-sm-2 col-form-label">Customer Name</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="cus_name" name="Customer Name">
+                    <input type="text" class="form-control" id="cus_name" name="cus_name">
                 </div>
             </div>
             <div class="form-group">
                 <label for="#" class="col-form-label">Select Products</label>
-                <span id="error"></span>
                 <table class="table table-bordered">
                     <tr>
                         <th width="30%">Enter Product Name</th>
@@ -62,7 +62,7 @@
             <div class="form-group row">
                 <label for="paid" class="col-sm-2 col-form-label">Paid</label>
                 <div class="col-sm-6">
-                    <input type="number" class="form-control" id="paid" name="paid">
+                    <input type="number" class="form-control" id="paid" name="paid" step="0.01">
                 </div>
             </div>
             <div class="form-group row">
@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="payment_type" class="col-sm-2 col-form-label">Payment Method</label>
+                <label for="payment_type" class="col-sm-2 col-form-label">Payment Type</label>
                 <div class="col-sm-6">
                     <select name="payment_type" class="form-control" id="payment_type">
                         <option value="1">Cash</option>
@@ -94,7 +94,8 @@
     $(document).ready(function(){
         //Date Picker
         $('#order_date').datepicker({
-            "autoclose": true
+            "autoclose": true,
+            "format": 'yy-mm-dd',
         });
         $("#order_date").datepicker("setDate", new Date());
         //Product Add
@@ -166,17 +167,27 @@
         });
         function calculate(dis,paid){
             var sub_total = 0;
+            var net_total = 0;
             var discount = dis;
+            var paid_amt = paid;
+            var due = 0;
             $('.total_price').each(function (){
                 sub_total = sub_total + ($(this).val() * 1);
             });
-            var net_total = sub_total - (sub_total * dis / 100);
+            net_total = sub_total - (sub_total * dis / 100);
+            due = net_total - paid_amt;
             $('#sub_total').val(sub_total);
             $('#net_total').val(net_total);
+            $('#due').val(due);
         }
         $('#discount').keyup(function (){
             var discount = $(this).val();
             calculate(discount,0);
+        });
+        $('#paid').keyup(function (){
+            var paid = $(this).val();
+            var discount = $('#discount').val();
+            calculate(discount,paid);
         });
         // Multiple Insert
         $('#insert_form').on('submit', function(event){
@@ -207,8 +218,9 @@
                     data: form_data,
                     success: function(data){
                         if(data == 'ok'){
+                            $("#insert_form")[0].reset();
                             $('#item_table > tr').empty();
-                            $('#error').html('<div class="alert alert-success">Item Details Save</div>');
+                            $('#error').html('<div class="alert alert-success">Order Details Save</div>');
                         }
                     }
                 });

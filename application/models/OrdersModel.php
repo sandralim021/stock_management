@@ -6,6 +6,12 @@
             return $query->result_array();
         }
         public function insert_entry($data){
+            $insert = $this->db->insert('orders', $data);
+            if($insert){
+                return $inserted_id = $this->db->insert_id();
+            }
+        }
+        public function insert_order_details($data){
             $insert = $this->db->insert_batch('order_details', $data);
             return ($insert == true) ? true : false;
         }

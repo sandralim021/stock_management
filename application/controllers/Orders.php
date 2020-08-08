@@ -19,20 +19,37 @@
             echo json_encode($data);
         }
         public function insert(){
-            $product_id = $this->input->post('product_name');
-            $total_price = $this->input->post('total_price');
-            $product_qty = $this->input->post('product_qty');
-            foreach ($product_id as $key => $item) 
-            {
-                $insert_data[] = array(
-                    'product_id'=> $item,
-                    'price' => $total_price[$key],
-                    'qty'=> $product_qty[$key],
-                );
+            //Insert Order Information
+            $data = array(
+                'order_date' => $this->input->post('order_date'),
+                'customer_name' => $this->input->post('cus_name'),
+                'sub_total' => $this->input->post('sub_total'),
+                'discount' => $this->input->post('discount'),
+                'net_total' => $this->input->post('net_total'),
+                'paid' => $this->input->post('paid'),
+                'due' => $this->input->post('due'),
+                'payment_type' => $this->input->post('payment_type')
+            );
+            $create = $this->o_model->insert_entry($data);
+            if($create != null){
+                 // Insert Order Details
+                $product_id = $this->input->post('product_name');
+                $total_price = $this->input->post('total_price');
+                $product_qty = $this->input->post('product_qty');
+                foreach ($product_id as $key => $item) 
+                {
+                    $insert_data[] = array(
+                        'order_id' => $create,
+                        'product_id'=> $item,
+                        'price' => $total_price[$key],
+                        'qty'=> $product_qty[$key],
+                    );
+                }
+                $create2 = $this->o_model->insert_order_details($insert_data);
+                if($create2 == true){
+                    echo 'ok';
+                }
             }
-            $create = $this->o_model->insert_entry($insert_data);
-            if($create == true){
-                echo 'ok';
-            }
+           
         }
     }
