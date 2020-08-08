@@ -12,13 +12,13 @@
         <form id="insert_form">
             <div class="form-group row">
                 <label for="order_name" class="col-sm-2 col-form-label">Order Date</label>
-                <div class="col-sm-10">
+                <div class="col-sm-6">
                     <input type="text" class="form-control" id="order_date">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="order_name" class="col-sm-2 col-form-label">Customer Name</label>
-                <div class="col-sm-10">
+                <div class="col-sm-6">
                     <input type="text" class="form-control" id="cus_name" name="Customer Name">
                 </div>
             </div>
@@ -40,9 +40,50 @@
                     
                     </tbody>
                 </table>
-                <div align="center">
-                    <input type="submit" name="submit" class="btn btn-info" value="insert">
+            </div>
+            <div class="form-group row">
+                <label for="sub_total" class="col-sm-2 col-form-label">Sub Total</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" id="sub_total" name="sub_total" value="0" readonly>
                 </div>
+            </div>
+            <div class="form-group row">
+                <label for="discount" class="col-sm-2 col-form-label">Discount</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" id="discount" name="discount">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="discount" class="col-sm-2 col-form-label">Net Total</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" id="net_total" name="net_total" value="0" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="discount" class="col-sm-2 col-form-label">Paid</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" id="paid" name="paid">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="discount" class="col-sm-2 col-form-label" readonly>Due</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" id="due" name="due" value="0" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="discount" class="col-sm-2 col-form-label">Payment Method</label>
+                <div class="col-sm-6">
+                    <select name="payment_type" class="form-control" id="payment_type">
+                        <option value="1">Cash</option>
+                        <option value="2">Card</option>
+                        <option value="3">Draft</option>
+                        <option value="4">Cheque</option>
+                    </select>
+                </div>
+            </div>
+            <div align="center">
+                <input type="submit" name="submit" class="btn btn-info" value="Print Invoice">
             </div>
         </form>
         </div>
@@ -76,6 +117,10 @@
         });
         // Remove Field
         $(document).on('click', '.remove', function(){
+            var total_price = $(this).closest('tr').find('.total_price').val();
+            var sub_total = $('#sub_total').val();
+            var total = sub_total - total_price;
+            $('#sub_total').val(total);
             $(this).closest('tr').remove();
         });
         // Select Product Action
@@ -96,6 +141,7 @@
         $("#item_table").delegate(".product_qty","keyup", function(){
             var qty = $(this);
             var tr = $(this).parent().parent();
+            var sub_total = 0;
             //Calculation
             if(isNaN(qty.val())) {
 			    alert("Please enter a valid quantity");
@@ -108,11 +154,18 @@
                    total_price = qty.val() * tr.find(".price").val();
                    tr.find("#display_price").html("Php "+total_price);
                    tr.find(".total_price").val(total_price);
+                   calculate(0,0);
                 }
             }
             
         });
-
+        function calculate(dis,paid){
+            var sub_total = 0;
+            $('.total_price').each(function (){
+                sub_total = sub_total + ($(this).val() * 1);
+            });
+            $('#sub_total').val(sub_total);
+        }
         // Multiple Insert
         $('#insert_form').on('submit', function(event){
             event.preventDefault();
