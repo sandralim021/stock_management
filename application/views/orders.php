@@ -119,10 +119,8 @@
         $(document).on('click', '.remove', function(){
             var total_price = $(this).closest('tr').find('.total_price').val();
             var sub_total = $('#sub_total').val();
-            var discount = $('#discount').val();
             var total = sub_total - total_price;
             $('#sub_total').val(total);
-            calculate(discount,0);
             $(this).closest('tr').remove();
         });
         // Select Product Action
