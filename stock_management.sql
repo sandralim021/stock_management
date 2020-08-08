@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 08, 2020 at 02:07 PM
+-- Generation Time: Aug 08, 2020 at 04:50 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -63,7 +63,8 @@ CREATE TABLE `brands` (
 
 INSERT INTO `brands` (`brand_id`, `brand_name`, `brand_status`) VALUES
 (1, 'HP', 1),
-(2, 'Acer NUMBAWAN', 0);
+(2, 'Acer NUMBAWAN', 0),
+(4, 'Mac', 1);
 
 -- --------------------------------------------------------
 
@@ -96,13 +97,20 @@ CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `customer_name` varchar(255) NOT NULL,
   `order_date` date NOT NULL,
-  `sub_total` double NOT NULL,
-  `discount` double NOT NULL,
-  `net_total` double NOT NULL,
-  `paid` double NOT NULL,
-  `due` double NOT NULL,
-  `payment_type` tinyint(4) NOT NULL
+  `sub_total` double DEFAULT 0,
+  `discount` double DEFAULT 0,
+  `net_total` double DEFAULT 0,
+  `paid` double DEFAULT 0,
+  `due` double DEFAULT 0,
+  `payment_type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `customer_name`, `order_date`, `sub_total`, `discount`, `net_total`, `paid`, `due`, `payment_type`) VALUES
+(1, 'Ericka Velasquez', '2020-08-08', 3210, 5, 3049.5, 3049.5, 0, 'Cash');
 
 -- --------------------------------------------------------
 
@@ -117,6 +125,15 @@ CREATE TABLE `order_details` (
   `price` double DEFAULT NULL,
   `qty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`od_id`, `order_id`, `product_id`, `price`, `qty`) VALUES
+(1, 1, 2, 10, 1),
+(2, 1, 3, 1200, 3),
+(3, 1, 4, 2000, 2);
 
 -- --------------------------------------------------------
 
@@ -141,7 +158,8 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`product_id`, `brand_id`, `category_id`, `product_name`, `qty`, `alert_qty`, `price`, `prod_status`) VALUES
 (2, 1, 8, 'Predator', 200, 50, '10', 1),
-(3, 2, 8, 'Solar Power', 35, 10, '400', 1);
+(3, 2, 8, 'Solar Power', 35, 10, '400', 1),
+(4, 4, 2, 'Mac Monitor', 80, 10, '1000', 1);
 
 --
 -- Indexes for dumped tables
@@ -199,7 +217,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -208,16 +226,22 @@ ALTER TABLE `categories`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
