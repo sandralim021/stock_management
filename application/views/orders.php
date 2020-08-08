@@ -54,25 +54,25 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="discount" class="col-sm-2 col-form-label">Net Total</label>
+                <label for="net_total" class="col-sm-2 col-form-label">Net Total</label>
                 <div class="col-sm-6">
                     <input type="number" class="form-control" id="net_total" name="net_total" value="0" readonly>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="discount" class="col-sm-2 col-form-label">Paid</label>
+                <label for="paid" class="col-sm-2 col-form-label">Paid</label>
                 <div class="col-sm-6">
                     <input type="number" class="form-control" id="paid" name="paid">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="discount" class="col-sm-2 col-form-label" readonly>Due</label>
+                <label for="due" class="col-sm-2 col-form-label" readonly>Due</label>
                 <div class="col-sm-6">
                     <input type="number" class="form-control" id="due" name="due" value="0" readonly>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="discount" class="col-sm-2 col-form-label">Payment Method</label>
+                <label for="payment_type" class="col-sm-2 col-form-label">Payment Method</label>
                 <div class="col-sm-6">
                     <select name="payment_type" class="form-control" id="payment_type">
                         <option value="1">Cash</option>
@@ -119,8 +119,10 @@
         $(document).on('click', '.remove', function(){
             var total_price = $(this).closest('tr').find('.total_price').val();
             var sub_total = $('#sub_total').val();
+            var discount = $('#discount').val();
             var total = sub_total - total_price;
             $('#sub_total').val(total);
+            calculate(discount,0);
             $(this).closest('tr').remove();
         });
         // Select Product Action
@@ -141,7 +143,7 @@
         $("#item_table").delegate(".product_qty","keyup", function(){
             var qty = $(this);
             var tr = $(this).parent().parent();
-            var sub_total = 0;
+            var sub_total = $('#sub_total').val();
             //Calculation
             if(isNaN(qty.val())) {
 			    alert("Please enter a valid quantity");
@@ -149,7 +151,12 @@
 		    }else{
                 if ((qty.val() - 0) > (tr.find(".total_qty").val()-0)) {
                     alert("Sorry ! This much of quantity is not available");
+                    var updated_sub = sub_total - tr.find(".total_price").val();
+                    $('#sub_total').val(updated_sub);
+                    // Values To 0
                     qty.val(0);
+                    tr.find("#display_price").html("Php "+0);
+                    tr.find(".total_price").val(0);
                 }else{
                    total_price = qty.val() * tr.find(".price").val();
                    tr.find("#display_price").html("Php "+total_price);
@@ -161,11 +168,18 @@
         });
         function calculate(dis,paid){
             var sub_total = 0;
+            var discount = dis;
             $('.total_price').each(function (){
                 sub_total = sub_total + ($(this).val() * 1);
             });
+            var net_total = sub_total - (sub_total * dis / 100);
             $('#sub_total').val(sub_total);
+            $('#net_total').val(net_total);
         }
+        $('#discount').keyup(function (){
+            var discount = $(this).val();
+            calculate(discount,0);
+        });
         // Multiple Insert
         $('#insert_form').on('submit', function(event){
             event.preventDefault();
