@@ -25,16 +25,20 @@
             <div class="form-group">
                 <label for="#" class="col-form-label">Select Products</label>
                 <span id="error"></span>
-                <table class="table table-bordered" id="item_table">
+                <table class="table table-bordered">
                     <tr>
                         <th width="30%">Enter Product Name</th>
                         <th width="15%">Total Qty</th>
                         <th width="15%">Enter Quantity</th>
                         <th width="15%">Price</th>
+                        <th width="15%">Total Price</th>
                         <th width="5%"><button type="button" name="add" 
                         class="btn btn-success btn-sm add">
                         <span class="fas fa-plus-circle"></span></button></th>
                     </tr>
+                    <tbody id="item_table">
+                    
+                    </tbody>
                 </table>
                 <div align="center">
                     <input type="submit" name="submit" class="btn btn-info" value="insert">
@@ -61,9 +65,10 @@
             html += '<option disabled>──────────</option>';
             html += '<?php foreach($products as $row): ?><option value="<?php echo $row['product_id'];?>"><?php echo $row['product_name']; ?></option><?php endforeach ?>';
             html += '</select></td>';
-            html += '<td><input type="text" class="form-control total_qty" name="total_qty" disabled></td>';
+            html += '<td><input type="text" class="form-control total_qty" name="total_qty[]" disabled></td>';
             html += '<td><input type="text" class="form-control product_qty" name="product_qty[]"></td>';
-            html += '<td><input type="text" class="form-control price" name="price" disabled></td>';
+            html += '<td><input type="text" class="form-control price" name="price[]" disabled></td>';
+            html += '<td id="display_price">Php 0</td>';
             html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove">';
             html += '<span class="fa fa-minus-circle"></span></button></td></tr>';
             $('#item_table').append(html);
@@ -72,18 +77,40 @@
         $(document).on('click', '.remove', function(){
             $(this).closest('tr').remove();
         });
-        $(document).on('change', '.product_name', function(){
-            var val=$(this).val();
+        // Select Product Action
+        $("#item_table").delegate(".product_name","change", function(){
+            var val = $(this).val();
+            var tr = $(this).parent().parent();
             $.ajax({
                 type: 'GET',
                 url: '<?php echo base_url() ?>orders/qty_price/'+val,
                 dataType: 'json',
                 success:function(data){
-                    $('.total_qty').val(data.qty);
-                    $('.price').val(data.price);
+                    tr.find(".total_qty").val(data.qty);
+                    tr.find(".price").val(data.price);
                 }
             });
         });
+        //Price Function
+        $("#item_table").delegate(".product_qty","keyup", function(){
+            var qty = $(this);
+            var tr = $(this).parent().parent();
+            //Calculation
+            if(isNaN(qty.val())) {
+			    alert("Please enter a valid quantity");
+			    qty.val(0);
+		    }else{
+                if ((qty.val() - 0) > (tr.find(".total_qty").val()-0)) {
+                    alert("Sorry ! This much of quantity is not available");
+                    qty.val(0);
+                }else{
+                   total_price = qty.val() * tr.find(".price").val();
+                   tr.find("#display_price").html("Php "+total_price);
+                }
+            }
+            
+        });
+
         // Multiple Insert
         $('#insert_form').on('submit', function(event){
             event.preventDefault();
@@ -113,7 +140,7 @@
                     data: form_data,
                     success: function(data){
                         if(data == 'ok'){
-                            $('#item_table').find("tr:gt(0)").remove();
+                            $('#item_table > tr').empty();
                             $('#error').html('<div class="alert alert-success">Item Details Save</div>');
                         }
                     }
