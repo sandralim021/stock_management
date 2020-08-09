@@ -78,6 +78,8 @@ $route['products/delete'] = 'products/delete/$1';
 $route['products/edit/(:any)'] = 'products/edit/$1';
 $route['products/update/(:any)'] = 'products/update/$1';
 //Orders
-$route['orders'] = 'orders/index';
-$route['orders/insert'] = 'orders/insert';
+$route['orders/add_order'] = 'orders/add_order';
+$route['orders/insert_order'] = 'orders/insert_order';
+$route['orders/manage_orders'] = 'orders/manage_orders';
+$route['orders/fetch_orders'] = 'orders/fetch_orders';
 $route['orders/qty_price/(:any)'] = 'orders/qty_price/$1';

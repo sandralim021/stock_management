@@ -89,9 +89,23 @@
       </li>
       <!-- Nav Item - Orders -->
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url() ?>orders">
-          <i class="fas fa-shopping-cart" aria-hidden="true"></i>
-          <span>Orders</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Orders</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Order Options:</h6>
+            <a class="collapse-item" href="<?php echo base_url() ?>orders/add_order">Add Order</a>
+            <a class="collapse-item" href="<?php echo base_url() ?>orders/manage_orders">Manage Orders</a>
+          </div>
+        </div>
+      </li>
+       <!-- Nav Item - Reports -->
+       <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-chart-bar" aria-hidden="true"></i>
+          <span>Reports</span></a>
       </li>
 
     </ul>

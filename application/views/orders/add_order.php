@@ -23,6 +23,12 @@
                     <input type="text" class="form-control" id="cus_name" name="cus_name">
                 </div>
             </div>
+            <div class="form-group row">
+                <label for="order_name" class="col-sm-2 col-form-label">Customer Contact</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="cus_contact" name="cus_contact">
+                </div>
+            </div>
             <div class="form-group">
                 <label for="#" class="col-form-label">Select Products</label>
                 <table class="table table-bordered">
@@ -83,7 +89,7 @@
                 </div>
             </div>
             <div align="center">
-                <input type="submit" name="submit" class="btn btn-info" value="Print Invoice">
+                <input type="submit" name="submit" class="btn btn-info" value="Place Order">
             </div>
         </form>
         </div>
@@ -210,7 +216,7 @@
 
             if(error == ''){
                 $.ajax({
-                    url: "<?php echo base_url() ?>orders/insert",
+                    url: "<?php echo base_url() ?>orders/insert_order",
                     method: "POST",
                     data: form_data,
                     success: function(data){

@@ -26,4 +26,12 @@
                 return false;
             }
         }
+        public function fetch_orders(){
+            $query = $this->db
+                     ->select('*')
+                     ->from('orders')
+                     ->get();
+        
+            return $query->result_array();
+        }
     }

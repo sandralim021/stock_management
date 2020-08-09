@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 08, 2020 at 04:50 PM
+-- Generation Time: Aug 09, 2020 at 03:56 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -96,6 +96,7 @@ INSERT INTO `categories` (`category_id`, `category_name`, `cat_status`) VALUES
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `customer_name` varchar(255) NOT NULL,
+  `customer_contact` varchar(255) NOT NULL,
   `order_date` date NOT NULL,
   `sub_total` double DEFAULT 0,
   `discount` double DEFAULT 0,
@@ -109,8 +110,9 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `customer_name`, `order_date`, `sub_total`, `discount`, `net_total`, `paid`, `due`, `payment_type`) VALUES
-(1, 'Ericka Velasquez', '2020-08-08', 3210, 5, 3049.5, 3049.5, 0, 'Cash');
+INSERT INTO `orders` (`order_id`, `customer_name`, `customer_contact`, `order_date`, `sub_total`, `discount`, `net_total`, `paid`, `due`, `payment_type`) VALUES
+(1, 'John Doe', '09274302437', '2020-08-09', 12500, 15, 10625, 10625, 0, 'Cash'),
+(2, 'Kaycee LIm', '09230840923', '2020-08-08', 2000, 10, 1800, 1000, 800, 'Cash');
 
 -- --------------------------------------------------------
 
@@ -131,9 +133,9 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`od_id`, `order_id`, `product_id`, `price`, `qty`) VALUES
-(1, 1, 2, 10, 1),
-(2, 1, 3, 1200, 3),
-(3, 1, 4, 2000, 2);
+(1, 1, 2, 10, 50),
+(2, 1, 3, 400, 30),
+(3, 2, 4, 1000, 2);
 
 -- --------------------------------------------------------
 
@@ -157,9 +159,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `brand_id`, `category_id`, `product_name`, `qty`, `alert_qty`, `price`, `prod_status`) VALUES
-(2, 1, 8, 'Predator', 200, 50, '10', 1),
-(3, 2, 8, 'Solar Power', 35, 10, '400', 1),
-(4, 4, 2, 'Mac Monitor', 80, 10, '1000', 1);
+(2, 1, 8, 'Predator', 150, 50, '10', 1),
+(3, 2, 8, 'Solar Power', 170, 10, '400', 1),
+(4, 4, 2, 'Mac Monitor', 198, 10, '1000', 1);
 
 --
 -- Indexes for dumped tables
@@ -229,7 +231,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `order_details`
