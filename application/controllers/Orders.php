@@ -34,16 +34,19 @@
             if($create != null){
                  // Insert Order Details
                 $product_id = $this->input->post('product_name');
-                $total_price = $this->input->post('total_price');
                 $product_qty = $this->input->post('product_qty');
+                $product_price = $this->input->post('price');
                 foreach ($product_id as $key => $item) 
                 {
                     $insert_data[] = array(
                         'order_id' => $create,
                         'product_id'=> $item,
-                        'price' => $total_price[$key],
+                        'price' => $product_price[$key], 
                         'qty'=> $product_qty[$key],
                     );
+                    $qty = $product_qty[$key];
+                    //Update QTY
+                   $this->db->query("UPDATE products SET qty = qty - $qty WHERE product_id = $item");
                 }
                 $create2 = $this->o_model->insert_order_details($insert_data);
                 if($create2 == true){

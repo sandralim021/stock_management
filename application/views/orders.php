@@ -109,16 +109,15 @@
             html += '</select></td>';
             html += '<td><input type="text" class="form-control total_qty" name="total_qty[]" disabled></td>';
             html += '<td><input type="text" class="form-control product_qty" name="product_qty[]"></td>';
-            html += '<td><input type="text" class="form-control price" name="price[]" disabled></td>';
-            html += '<input type="hidden" class="form-control total_price" name="total_price[]" value="0">';
-            html += '<td id="display_price">Php 0</td>';
+            html += '<td><input type="text" class="form-control price" name="price[]" readonly></td>';
+            html += '<td>Php. <span class="total_price">0</span></td>';
             html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove">';
             html += '<span class="fa fa-minus-circle"></span></button></td></tr>';
             $('#item_table').append(html);
         });
         // Remove Field
         $(document).on('click', '.remove', function(){
-            var total_price = $(this).closest('tr').find('.total_price').val();
+            var total_price = $(this).closest('tr').find('.total_price').html();
             var sub_total = $('#sub_total').val();
             var total = sub_total - total_price;
             $('#sub_total').val(total);
@@ -150,16 +149,14 @@
 		    }else{
                 if ((qty.val() - 0) > (tr.find(".total_qty").val()-0)) {
                     alert("Sorry ! This much of quantity is not available");
-                    var updated_sub = sub_total - tr.find(".total_price").val();
+                    var updated_sub = sub_total - tr.find(".total_price").html();
                     $('#sub_total').val(updated_sub);
                     // Values To 0
                     qty.val(0);
-                    tr.find("#display_price").html("Php "+0);
-                    tr.find(".total_price").val(0);
+                    tr.find(".total_price").html(0);
                 }else{
                    total_price = qty.val() * tr.find(".price").val();
-                   tr.find("#display_price").html("Php "+total_price);
-                   tr.find(".total_price").val(total_price);
+                   tr.find(".total_price").html(total_price);
                    calculate(0,0);
                 }
             }
@@ -172,7 +169,7 @@
             var paid_amt = paid;
             var due = 0;
             $('.total_price').each(function (){
-                sub_total = sub_total + ($(this).val() * 1);
+                sub_total = sub_total + ($(this).html() * 1);
             });
             net_total = sub_total - (sub_total * dis / 100);
             due = net_total - paid_amt;
