@@ -154,12 +154,12 @@
     }
 
     .invoice footer {
-        position: absolute;
-        bottom: 10px;
-        page-break-after: always
+        position: fixed;
+        bottom: 0px;
+        page-break-after: auto;
     }
 
     .invoice>div:last-child {
-        page-break-before: always
+        page-break-after: auto;
     }
 }
