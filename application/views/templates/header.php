@@ -16,7 +16,6 @@
   <link href="<?php echo base_url() ?>assets/sb_admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
   <link href="<?php echo base_url() ?>assets/sb_admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-  <link href="<?php echo base_url() ?>assets/sb_admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link href="<?php echo base_url() ?>assets/datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
   <!-- Bootstrap core JavaScript-->
   <script src="<?php echo base_url() ?>assets/sb_admin/vendor/jquery/jquery.min.js"></script>

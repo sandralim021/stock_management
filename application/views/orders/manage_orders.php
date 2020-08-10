@@ -128,6 +128,7 @@
                     }
 				});
 			});
+
             function calculate(dis,paid){
                 var sub_total = $('#sub_total').val();
                 var net_total = $('#net_total').val();
