@@ -30,11 +30,10 @@
                 // button
                 $select = '';
                 $select .= '<div class="dropdown">';
-                $select .= '<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>';
+                $select .= '<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>';
                 $select .= '<div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">';
-                $select .= '<a class="dropdown-item" href="#">Action</a>';
-                $select .= '<a class="dropdown-item" href="#">Another action</a>';
-                $select .= '<a class="dropdown-item" href="#">Something else here</a>';
+                $select .= '<a class="dropdown-item payment-edit" href="#" data='.$value['order_id'].'>Payment</a>';
+                $select .= '<a class="dropdown-item" href="#">Print Invoice</a>';
                 $select .= '</div></div>';
                 $payment_type = '<span class="badge badge-info">'.$value['payment_type'].'</span>';
                 if($value['paid'] == $value['net_total']){
@@ -56,10 +55,12 @@
             }   // /foreach
             echo json_encode($result); 
         }
+
         public function qty_price($id){
             $data = $this->o_model->qty_price($id);
             echo json_encode($data);
         }
+
         public function insert_order(){
             //Insert Order Information
             $data = array(
@@ -97,5 +98,31 @@
                 }
             }
            
+        }
+
+        public function edit_payment($id){
+            $data = $this->o_model->edit_payment($id);
+            echo json_encode($data);
+        }
+
+        public function update_payment($id){
+            $data = array(
+                'sub_total' => $this->input->post('sub_total'),
+                'discount' => $this->input->post('discount'),
+                'net_total' => $this->input->post('net_total'),
+                'paid' => $this->input->post('paid'),
+                'due' => $this->input->post('due'),
+                'payment_type' => $this->input->post('payment_type')
+            );
+            $update = $this->o_model->update_payment($data,$id);
+            if($update == true) {
+                $response['success'] = true;
+                $response['messages'] = 'Succesfully updated';
+            }
+            else {
+                $response['success'] = false;
+                $response['messages'] = 'Error in the database while updated the Category information';			
+            }
+            echo json_encode($response);
         }
     }

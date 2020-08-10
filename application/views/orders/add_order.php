@@ -83,7 +83,6 @@
                     <select name="payment_type" class="form-control" id="payment_type">
                         <option value="Cash">Cash</option>
                         <option value="Card">Card</option>
-                        <option value="Draft">Draft</option>
                         <option value="Cheque">Cheque</option>
                     </select>
                 </div>
