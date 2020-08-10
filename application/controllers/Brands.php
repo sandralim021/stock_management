@@ -88,11 +88,10 @@ class Brands extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="invalid-feedback">','</div>');
         if($this->form_validation->run() == TRUE){
             $data = array(
-                'brand_id' => $this->input->post('brand_id'),
                 'brand_name' => $this->input->post('brand_name'),
                 'brand_status' => $this->input->post('brand_status')
             );
-            $update = $this->b_model->update_entry($data);
+            $update = $this->b_model->update_entry($data,$id);
             if($update == true) {
                 $response['success'] = true;
                 $response['messages'] = 'Succesfully updated';

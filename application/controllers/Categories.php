@@ -87,11 +87,10 @@ class Categories extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="invalid-feedback">','</div>');
         if($this->form_validation->run() == TRUE){
             $data = array(
-                'category_id' => $this->input->post('category_id'),
                 'category_name' => $this->input->post('category_name'),
                 'cat_status' => $this->input->post('cat_status')
             );
-            $update = $this->c_model->update_entry($data);
+            $update = $this->c_model->update_entry($data,$id);
             if($update == true) {
                 $response['success'] = true;
                 $response['messages'] = 'Succesfully updated';

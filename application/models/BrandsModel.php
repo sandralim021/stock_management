@@ -24,8 +24,8 @@ class BrandsModel extends CI_Model {
 
     }
 
-    public function update_entry($data){
-        $update = $this->db->update('brands', $data, array('brand_id' => $data['brand_id']));
+    public function update_entry($data,$id){
+        $update = $this->db->update('brands', $data, array('brand_id' => $id));
         return ($update) ? true : false;
     
     }

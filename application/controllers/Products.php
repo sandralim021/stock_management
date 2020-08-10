@@ -107,7 +107,6 @@ class Products extends CI_Controller {
 
         if ($this->form_validation->run() == TRUE) {
             $data = array(
-                'product_id' => $this->input->post('product_id'),
                 'brand_id' => $this->input->post('brand_id'),
                 'category_id' => $this->input->post('category_id'),
                 'product_name' => $this->input->post('product_name'),
@@ -116,7 +115,7 @@ class Products extends CI_Controller {
                 'price' => $this->input->post('price'),
                 'prod_status' => $this->input->post('prod_status')
             );
-            $update = $this->p_model->update_entry($data);
+            $update = $this->p_model->update_entry($data,$id);
             if($update == true) {
                 $response['success'] = true;
                 $response['messages'] = 'Succesfully Updated';

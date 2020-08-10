@@ -25,8 +25,8 @@ class CategoriesModel extends CI_Model {
 
     }
 
-    public function update_entry($data){
-        $update = $this->db->update('categories', $data, array('category_id' => $data['category_id']));
+    public function update_entry($data,$id){
+        $update = $this->db->update('categories', $data, array('category_id' => $id));
         return ($update) ? true : false;
     
     }
