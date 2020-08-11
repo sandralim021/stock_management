@@ -112,7 +112,7 @@ class Categories extends CI_Controller {
     }
     
     public function delete($id){
-        if($id) {
+        if($id){
             $delete = $this->c_model->delete_entry($id);
             if($delete == true) {
                 $response['success'] = true;

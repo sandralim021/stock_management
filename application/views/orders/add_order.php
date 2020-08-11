@@ -218,11 +218,25 @@
                     url: "<?php echo base_url() ?>orders/insert_order",
                     method: "POST",
                     data: form_data,
-                    success: function(data){
-                        if(data == 'ok'){
+                    dataType: 'json',
+                    success: function(response){
+                        if(response.success === true){
                             $("#insert_form")[0].reset();
                             $('#item_table > tr').empty();
-                            $('#error').html('<div class="alert alert-success">Order Details Save</div>');
+                            Swal.fire({
+                                title: 'Success',
+                                text: response.messages,
+                                icon: 'success',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#565D63',
+                                confirmButtonText: 'Print Invoice',
+                                cancelButtonText: 'Ok'
+                                }).then((result) => {
+                                if (result.value) {
+                                   window.open('<?php echo base_url() ?>orders/invoice/'+response.order_id);
+                                }
+                            })
                         }
                     }
                 });

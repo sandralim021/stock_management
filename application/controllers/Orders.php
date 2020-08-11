@@ -94,9 +94,16 @@
                 }
                 $create2 = $this->o_model->insert_order_details($insert_data);
                 if($create2 == true){
-                    echo 'ok';
+                    $response['success'] = true;
+                    $response['messages'] = 'Order has been processed!';
+                    $response['order_id'] = $create;	
+                }else{
+                    $response['success'] = false;
+                    $response['messages'] = 'Problems encountered while processing orders';
+                
                 }
             }
+            echo json_encode($response);
            
         }
 
@@ -121,7 +128,7 @@
             }
             else {
                 $response['success'] = false;
-                $response['messages'] = 'Error in the database while updated the Category information';			
+                $response['messages'] = 'Error in the database while updated the Payment information';			
             }
             echo json_encode($response);
         }
