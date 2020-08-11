@@ -86,4 +86,4 @@ $route['orders/manage_orders'] = 'orders/manage_orders';
 $route['orders/fetch_orders'] = 'orders/fetch_orders';
 $route['orders/edit_payment/(:any)'] = 'orders/edit_payment/$1';
 $route['orders/update_payment/(:any)'] = 'orders/update_payment/$1';
-$route['orders/invoice'] = 'orders/invoice';
+$route['orders/invoice/(:any)'] = 'orders/invoice/$1';

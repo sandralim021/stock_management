@@ -33,7 +33,7 @@
                 $select .= '<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>';
                 $select .= '<div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">';
                 $select .= '<a class="dropdown-item payment-edit" href="#" data='.$value['order_id'].'>Payment</a>';
-                $select .= '<a class="dropdown-item invoice" href="'.base_url().'orders/invoice" target="_blank">Print Invoice</a>';
+                $select .= '<a class="dropdown-item invoice" href="'.base_url().'orders/invoice/'.$value['order_id'].'" target="_blank">Print Invoice</a>';
                 $select .= '</div></div>';
                 $payment_type = '<span class="badge badge-info">'.$value['payment_type'].'</span>';
                 if($value['paid'] == $value['net_total']){
@@ -125,7 +125,9 @@
             }
             echo json_encode($response);
         }
-        public function invoice(){
-            $this->load->view('orders/invoice');
+        public function invoice($id){
+            $data['order'] = $this->o_model->invoice($id);
+            $data['details'] = $this->o_model->invoice_details($id);
+            $this->load->view('orders/invoice',$data);
         }
     }

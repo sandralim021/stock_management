@@ -2,12 +2,11 @@
 class ProductsModel extends CI_Model {
 
     public function get_entries(){
-        $query = $this->db
-                     ->select('*')
-                     ->from('products')
-                     ->join('brands','brands.brand_id = products.brand_id','left')
-                     ->join('categories','categories.category_id = products.category_id','left')
-                     ->get();
+        $query = $this->db->select('*')
+                        ->from('products')
+                        ->join('brands','brands.brand_id = products.brand_id','left')
+                        ->join('categories','categories.category_id = products.category_id','left')
+                        ->get();
         
         return $query->result_array();
        

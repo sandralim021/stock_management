@@ -56,4 +56,23 @@
             return ($update) ? true : false;
         
         }
+        public function invoice($id){
+            $query = $this->db->select('*')
+                            ->from('orders')
+                            ->where('order_id',$id)
+                            ->get();
+            if(count($query->result()) > 0){
+                return $query->row();
+            }else{
+                return false;
+            }
+        }
+        public function invoice_details($id){
+            $query = $this->db->select('od.price,od.qty,p.product_name')
+                            ->from('order_details od')
+                            ->join('products p','p.product_id = od.product_id','left')
+                            ->where('od.order_id',$id)
+                            ->get();
+            return $query->result();
+        }
     }
