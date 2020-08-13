@@ -55,7 +55,7 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item">
+      <li class="nav-item <?php if($this->uri->segment(1)=="dashboard"){echo "active";}?>">
         <a class="nav-link" href="<?php echo base_url() ?>dashboard">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
@@ -69,39 +69,39 @@
         Modules
       </div>
       <!-- Nav Item - Brands -->
-      <li class="nav-item">
+      <li class="nav-item  <?php if($this->uri->segment(1)=="brands"){echo "active";}?>">
         <a class="nav-link" href="<?php echo base_url() ?>brands">
           <i class="fa fa-circle"></i>
           <span>Brands</span></a>
       </li>
       <!-- Nav Item - Categories -->
-      <li class="nav-item">
+      <li class="nav-item <?php if($this->uri->segment(1)=="categories"){echo "active";}?>">
         <a class="nav-link" href="<?php echo base_url() ?>categories">
           <i class="fa fa-list-alt"></i>
           <span>Categories</span></a>
       </li>
       <!-- Nav Item - Products -->
-      <li class="nav-item">
+      <li class="nav-item <?php if($this->uri->segment(1)=="products"){echo "active";}?>">
         <a class="nav-link" href="<?php echo base_url() ?>products">
           <i class="fas fa-tag" aria-hidden="true"></i>
           <span>Products</span></a>
       </li>
       <!-- Nav Item - Orders -->
-      <li class="nav-item">
+      <li class="nav-item <?php if($this->uri->segment(2)=="add_order" || $this->uri->segment(2)=="manage_orders"){echo "active";}?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-shopping-cart"></i>
           <span>Orders</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapsePages" class="collapse <?php if($this->uri->segment(2)=="add_order" || $this->uri->segment(2)=="manage_orders"){echo "show";}?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Order Options:</h6>
-            <a class="collapse-item" href="<?php echo base_url() ?>orders/add_order">Add Order</a>
-            <a class="collapse-item" href="<?php echo base_url() ?>orders/manage_orders">Manage Orders</a>
+            <a class="collapse-item <?php if($this->uri->segment(2)=="add_order"){echo "active";}?>" href="<?php echo base_url() ?>orders/add_order">Add Order</a>
+            <a class="collapse-item <?php if($this->uri->segment(2)=="manage_orders"){echo "active";}?>" href="<?php echo base_url() ?>orders/manage_orders">Manage Orders</a>
           </div>
         </div>
       </li>
        <!-- Nav Item - Reports -->
-       <li class="nav-item">
+       <li class="nav-item <?php if($this->uri->segment(1)=="reports"){echo "active";}?>">
         <a class="nav-link" href="<?php echo base_url() ?>reports">
           <i class="fas fa-chart-bar" aria-hidden="true"></i>
           <span>Reports</span></a>
