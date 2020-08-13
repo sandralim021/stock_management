@@ -19,8 +19,8 @@
                                 <th>Brand</th>
                                 <th>Category</th>
                                 <th>Product Name</th>
-                                <th>Quantity</th>
-                                <th>Alert Quantity</th>
+                                <th width="10%">Quantity</th>
+                                <th width="15%">Alert Quantity</th>
                                 <th>Price</th>
                                 <th>Status</th>
                                 <th>Action</th>

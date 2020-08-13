@@ -38,9 +38,9 @@
                 $payment_type = '<span class="badge badge-info">'.$value['payment_type'].'</span>';
                 if($value['paid'] == $value['net_total']){
                     $payment_status ='<span class="badge badge-success">Full Payment</span>';
-                }else if($value['paid'] < $value['net_total']){
+                }if($value['paid'] < $value['net_total']){
                     $payment_status ='<span class="badge badge-warning">Partial Payment</span>';
-                }else if($value['paid'] == 0){
+                }if($value['paid'] == 0){
                     $payment_status ='<span class="badge badge-danger">No Payment</span>';
                 }
                 $result['data'][$key] = array(

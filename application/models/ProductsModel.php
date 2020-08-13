@@ -12,12 +12,16 @@ class ProductsModel extends CI_Model {
        
     }
     public function get_brands(){
-        $query = $this->db->get('brands');
+        $query = $this->db->where('brand_status','1')
+                        ->get('brands');
+
         return $query->result_array();
     }
 
     public function get_categories(){
-        $query = $this->db->get('categories');
+        $query = $this->db->where('cat_status','1')
+                        ->get('categories');
+
         return $query->result_array();
     }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 13, 2020 at 01:17 PM
+-- Generation Time: Aug 13, 2020 at 02:29 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -62,9 +62,12 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`brand_id`, `brand_name`, `brand_status`) VALUES
-(1, 'HP', 0),
-(2, 'Acer NUMBAWAN', 1),
-(4, 'Mac', 1);
+(1, 'Brand 1', 0),
+(2, 'Brand 2', 0),
+(3, 'Brand 3', 1),
+(4, 'Brand 4', 1),
+(5, 'Brand 5', 1),
+(6, 'Brand 6', 0);
 
 -- --------------------------------------------------------
 
@@ -83,9 +86,12 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`category_id`, `category_name`, `cat_status`) VALUES
-(2, 'Monitor', 1),
-(4, 'Gla', 1),
-(8, 'CDR King', 0);
+(1, 'Category 1', 1),
+(2, 'Category 2', 1),
+(3, 'Category 3', 0),
+(4, 'Category 4', 0),
+(5, 'Category 5', 0),
+(6, 'Category 6', 1);
 
 -- --------------------------------------------------------
 
@@ -111,8 +117,10 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `customer_name`, `customer_contact`, `order_date`, `sub_total`, `discount`, `net_total`, `paid`, `due`, `payment_type`) VALUES
-(1, 'Ericka Velasquez', '09273849201', '2020-08-13', 30000, 15, 25500, 20000, 5500, 'Cheque'),
-(2, 'John Doe', '09273849201', '2020-08-05', 3000, 10, 2700, 2700, 0, 'Cash');
+(1, 'Ericka Velasquez', '09497771100', '2020-08-08', 5400, 5, 5130, 5130, 0, 'Cash'),
+(2, 'Kaycee Lim', '09274302437', '2020-08-09', 10400, 0, 10400, 1000, 9400, 'Cash'),
+(3, 'John Doe', '099999999', '2020-07-30', 6400, 5, 6080, 0, 6080, 'Cash'),
+(4, 'Fatima Lim', '09065067156', '2020-08-01', 20800, 10, 18720, 18720, 0, 'Card');
 
 -- --------------------------------------------------------
 
@@ -133,10 +141,17 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`od_id`, `order_id`, `product_id`, `price`, `qty`) VALUES
-(1, 1, 3, 400, 50),
-(2, 1, 4, 1000, 10),
-(3, 2, 2, 100, 10),
-(4, 2, 4, 1000, 2);
+(1, 1, 1, 1400, 3),
+(2, 1, 4, 300, 4),
+(3, 2, 4, 300, 8),
+(4, 2, 6, 400, 5),
+(5, 2, 2, 600, 10),
+(6, 3, 4, 300, 8),
+(7, 3, 6, 400, 10),
+(8, 4, 1, 1400, 7),
+(9, 4, 2, 600, 10),
+(10, 4, 4, 300, 10),
+(11, 4, 6, 400, 5);
 
 -- --------------------------------------------------------
 
@@ -160,9 +175,12 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `brand_id`, `category_id`, `product_name`, `qty`, `alert_qty`, `price`, `prod_status`) VALUES
-(2, 1, 8, 'Predator', 132, 20, '100', 1),
-(3, 2, 8, 'Solar Power', 90, 10, '400', 1),
-(4, 4, 2, 'Mac Monitor', 167, 10, '1000', 1);
+(1, 4, 1, 'Product 1', 90, 10, '1400', 1),
+(2, 5, 2, 'Product 2', 130, 20, '600', 1),
+(3, 3, 6, 'Product 3', 140, 15, '200', 0),
+(4, 4, 2, 'Product 4', 170, 10, '300', 1),
+(5, 4, 2, 'Product 5', 60, 5, '800', 0),
+(6, 3, 6, 'Product 6', 150, 10, '400', 1);
 
 --
 -- Indexes for dumped tables
@@ -220,31 +238,31 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

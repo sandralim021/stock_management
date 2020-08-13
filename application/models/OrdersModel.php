@@ -2,7 +2,9 @@
     class OrdersModel extends CI_Model{
         
         public function get_products(){
-            $query = $this->db->get('products');
+            $query = $this->db->where('prod_status','1')
+                            ->get('products');
+
             return $query->result_array();
         }
 

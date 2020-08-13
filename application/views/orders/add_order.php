@@ -14,7 +14,7 @@
             <div class="form-group row">
                 <label for="order_name" class="col-sm-2 col-form-label">Order Date</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="order_date" name="order_date">
+                    <input type="text" class="form-control" id="order_date" name="order_date" autocomplete="off">
                 </div>
             </div>
             <div class="form-group row">

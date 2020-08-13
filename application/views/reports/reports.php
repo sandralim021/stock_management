@@ -13,13 +13,13 @@
                 <div class="form-group row justify-content-center">
                     <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="start_date" name="start_date">
+                        <input type="text" class="form-control" id="start_date" name="start_date" autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group row justify-content-center">
                     <label for="end_date" class="col-sm-2 col-form-label">End Date</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="end_date" name="end_date">
+                        <input type="text" class="form-control" id="end_date" name="end_date" autocomplete="off">
                     </div>
                 </div>
                 <div align="center">
