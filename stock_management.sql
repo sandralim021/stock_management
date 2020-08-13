@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 09, 2020 at 03:56 PM
+-- Generation Time: Aug 13, 2020 at 01:17 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -62,8 +62,8 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`brand_id`, `brand_name`, `brand_status`) VALUES
-(1, 'HP', 1),
-(2, 'Acer NUMBAWAN', 0),
+(1, 'HP', 0),
+(2, 'Acer NUMBAWAN', 1),
 (4, 'Mac', 1);
 
 -- --------------------------------------------------------
@@ -84,7 +84,7 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`category_id`, `category_name`, `cat_status`) VALUES
 (2, 'Monitor', 1),
-(4, 'Gla', 0),
+(4, 'Gla', 1),
 (8, 'CDR King', 0);
 
 -- --------------------------------------------------------
@@ -111,8 +111,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `customer_name`, `customer_contact`, `order_date`, `sub_total`, `discount`, `net_total`, `paid`, `due`, `payment_type`) VALUES
-(1, 'John Doe', '09274302437', '2020-08-09', 12500, 15, 10625, 10625, 0, 'Cash'),
-(2, 'Kaycee LIm', '09230840923', '2020-08-08', 2000, 10, 1800, 1000, 800, 'Cash');
+(1, 'Ericka Velasquez', '09273849201', '2020-08-13', 30000, 15, 25500, 20000, 5500, 'Cheque'),
+(2, 'John Doe', '09273849201', '2020-08-05', 3000, 10, 2700, 2700, 0, 'Cash');
 
 -- --------------------------------------------------------
 
@@ -133,9 +133,10 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`od_id`, `order_id`, `product_id`, `price`, `qty`) VALUES
-(1, 1, 2, 10, 50),
-(2, 1, 3, 400, 30),
-(3, 2, 4, 1000, 2);
+(1, 1, 3, 400, 50),
+(2, 1, 4, 1000, 10),
+(3, 2, 2, 100, 10),
+(4, 2, 4, 1000, 2);
 
 -- --------------------------------------------------------
 
@@ -159,9 +160,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `brand_id`, `category_id`, `product_name`, `qty`, `alert_qty`, `price`, `prod_status`) VALUES
-(2, 1, 8, 'Predator', 150, 50, '10', 1),
-(3, 2, 8, 'Solar Power', 170, 10, '400', 1),
-(4, 4, 2, 'Mac Monitor', 198, 10, '1000', 1);
+(2, 1, 8, 'Predator', 132, 20, '100', 1),
+(3, 2, 8, 'Solar Power', 90, 10, '400', 1),
+(4, 4, 2, 'Mac Monitor', 167, 10, '1000', 1);
 
 --
 -- Indexes for dumped tables
@@ -225,7 +226,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -237,7 +238,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `products`

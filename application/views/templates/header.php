@@ -102,7 +102,7 @@
       </li>
        <!-- Nav Item - Reports -->
        <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?php echo base_url() ?>reports">
           <i class="fas fa-chart-bar" aria-hidden="true"></i>
           <span>Reports</span></a>
       </li>
