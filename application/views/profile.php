@@ -9,7 +9,16 @@
         Profile Information
     </div>
     <div class="card-body">
-    <form id="profile_form" method="POST" target="_blank">
+    <?php if($this->session->flashdata('success')): ?>
+        <div class="alert alert-success" role="alert">
+            <?php echo $this->session->flashdata('success'); ?>
+        </div>
+        <?php elseif($this->session->flashdata('error')): ?>
+        <div class="alert alert-error" role="alert">
+            <?php echo $this->session->flashdata('error'); ?>
+        </div>
+    <?php endif; ?>
+    <form id="profile_form">
         <div class="form-group row justify-content-center">
             <label for="fname" class="col-sm-2 col-form-label">First Name</label>
             <div class="col-sm-5">
@@ -32,7 +41,7 @@
         <div class="form-group row justify-content-center">
             <label for="username" class="col-sm-2 col-form-label">Username</label>
             <div class="col-sm-5">
-                <input type="email" class="form-control" id="username" name="username" autocomplete="off" value="<?php echo $this->session->userdata('username')?>"">
+                <input type="text" class="form-control" id="username" name="username" autocomplete="off" value="<?php echo $this->session->userdata('username')?>"">
             </div>
         </div>
         <div class="form-group row justify-content-center">
@@ -42,10 +51,57 @@
             </div>
         </div>
         <div align="center">
-            <button type="submit" id="btn_save" name="btn_save" class="btn btn-primary">Update Changes</button>
+            <button type="submit" class="btn btn-primary">Update Changes</button>
         </div>
     </form>
     </div>
 </div>
-
 </div>
+
+<script>
+    $(document).ready(function(){
+        <?php if($this->session->flashdata('success')): ?>
+			$('.alert-success').fadeIn().delay(2000).fadeOut('slow');
+		<?php elseif($this->session->flashdata('error')): ?>
+			$('.alert-error').fadeIn().delay(2000).fadeOut('slow');
+		<?php endif; ?>
+        
+        $('#profile_form').submit(function (e){
+            e.preventDefault();
+            var form = $(this).serialize();
+            var id = <?php echo $this->session->userdata('user_id'); ?>
+
+            $.ajax({
+                url: '<?php echo base_url(); ?>profile/update_profile/'+id,
+                data: form,
+                dataType: 'json',
+                type: 'post',
+                success: function(response){
+                    if(response.success == true){
+                        location.reload();
+                    }
+                    else{
+                        $.each(response.messages, function(index, value) {
+                        var id = $("#"+index);
+                        id.closest('.form-control')
+                        .removeClass('is-invalid')
+                        .removeClass('is-valid')
+                        .addClass(value.length > 0 ? 'is-invalid' : 'is-valid');
+                        
+                        id.after(value);
+
+                    });
+                    }
+                },
+                error: function(xhr, textStatus, error) {
+                    console.log(xhr.responseText);
+                    console.log(xhr.statusText);
+                    console.log(textStatus);
+                    console.log(error);
+                }
+            });
+            
+        });
+
+    });
+</script>

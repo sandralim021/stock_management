@@ -57,6 +57,7 @@ $route['login/index'] = 'user/index';
 $route['login'] = 'user/login';
 $route['logout'] = 'user/logout';
 $route['profile'] = 'user/profile';
+$route['profile/update_profile/(:any)'] = 'user/update_profile/$1';
 //Brands
 $route['brands'] = 'brands/index';
 $route['brands/insert'] = 'brands/insert';
