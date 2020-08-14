@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 13, 2020 at 02:29 PM
+-- Generation Time: Aug 14, 2020 at 11:26 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -22,28 +22,6 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `stock_management` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `stock_management`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin`
---
-
-CREATE TABLE `admin` (
-  `admin_id` int(11) NOT NULL,
-  `fname` varchar(255) NOT NULL,
-  `lname` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`admin_id`, `fname`, `lname`, `email`, `username`, `password`) VALUES
-(1, 'Kassandra', 'Lim', 'kaycee@gmail.com', 'kaycee', 'e82cee85ef61260f0a45e4d60a10ae46');
 
 -- --------------------------------------------------------
 
@@ -118,7 +96,7 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`order_id`, `customer_name`, `customer_contact`, `order_date`, `sub_total`, `discount`, `net_total`, `paid`, `due`, `payment_type`) VALUES
 (1, 'Ericka Velasquez', '09497771100', '2020-08-08', 5400, 5, 5130, 5130, 0, 'Cash'),
-(2, 'Kaycee Lim', '09274302437', '2020-08-09', 10400, 0, 10400, 1000, 9400, 'Cash'),
+(2, 'Kaycee Lim', '09274302437', '2020-08-14', 10400, 0, 10400, 1000, 9400, 'Cash'),
 (3, 'John Doe', '099999999', '2020-07-30', 6400, 5, 6080, 0, 6080, 'Cash'),
 (4, 'Fatima Lim', '09065067156', '2020-08-01', 20800, 10, 18720, 18720, 0, 'Card');
 
@@ -182,15 +160,31 @@ INSERT INTO `products` (`product_id`, `brand_id`, `category_id`, `product_name`,
 (5, 4, 2, 'Product 5', 60, 5, '800', 0),
 (6, 3, 6, 'Product 6', 150, 10, '400', 1);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `fname` varchar(255) NOT NULL,
+  `lname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `fname`, `lname`, `email`, `username`, `password`) VALUES
+(1, 'Kassandra', 'Lim', 'kaycee@gmail.com', 'kaycee', 'e82cee85ef61260f0a45e4d60a10ae46');
+
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`admin_id`);
 
 --
 -- Indexes for table `brands`
@@ -225,14 +219,14 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexes for table `users`
 --
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT for dumped tables
 --
-ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `brands`
@@ -263,6 +257,12 @@ ALTER TABLE `order_details`
 --
 ALTER TABLE `products`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

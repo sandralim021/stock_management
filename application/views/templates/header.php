@@ -87,12 +87,12 @@
           <span>Products</span></a>
       </li>
       <!-- Nav Item - Orders -->
-      <li class="nav-item <?php if($this->uri->segment(2)=="add_order" || $this->uri->segment(2)=="manage_orders"){echo "active";}?>">
+      <li class="nav-item <?php if($this->uri->segment(1)=="orders"){echo "active";}?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-shopping-cart"></i>
           <span>Orders</span>
         </a>
-        <div id="collapsePages" class="collapse <?php if($this->uri->segment(2)=="add_order" || $this->uri->segment(2)=="manage_orders"){echo "show";}?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapsePages" class="collapse <?php if($this->uri->segment(1)=="orders"){echo "show";}?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Order Options:</h6>
             <a class="collapse-item <?php if($this->uri->segment(2)=="add_order"){echo "active";}?>" href="<?php echo base_url() ?>orders/add_order">Add Order</a>
@@ -270,11 +270,10 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $this->session->userdata('full_name')?></span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="<?php echo base_url() ?>profile">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>

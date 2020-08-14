@@ -1,8 +1,8 @@
 <?php
-    class Users extends CI_Controller{
+    class User extends CI_Controller{
         public function __construct(){
             parent::__construct();
-            $this->load->model('UsersModel','u_model');
+            $this->load->model('UserModel','u_model');
         }
         public function index(){
             if($this->session->userdata('logged_in')){
@@ -20,6 +20,10 @@
                 $full_name = $data['fname'] ." ". $data['lname'];
                 $session_data = array(
                     'full_name' => $full_name,
+                    'user_id' => $data['user_id'],
+                    'fname' => $data['fname'],
+                    'lname' => $data['lname'],
+                    'email' => $data['email'],
                     'username' => $username,
                     'logged_in' => true
                 );
@@ -33,5 +37,12 @@
         public function logout(){
             $this->session->sess_destroy();
             redirect('login/index'); 
+        }
+        public function profile(){
+            $data['title'] = 'Profile';
+
+            $this->load->view('templates/header',$data);
+            $this->load->view('profile');
+            $this->load->view('templates/footer');
         }
     }
