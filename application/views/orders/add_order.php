@@ -10,23 +10,25 @@
         </div>
         <div class="card-body">
         <form id="insert_form">
-            <span id="error"></span>
             <div class="form-group row">
                 <label for="order_name" class="col-sm-2 col-form-label">Order Date</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="order_date" name="order_date" autocomplete="off">
+                    <div class="invalid-feedback"> The Order Date field is required </div>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="order_name" class="col-sm-2 col-form-label">Customer Name</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="cus_name" name="cus_name">
+                    <div class="invalid-feedback"> The Customer Name field is required </div>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="order_name" class="col-sm-2 col-form-label">Customer Contact</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="cus_contact" name="cus_contact">
+                    <div class="invalid-feedback"> The Customer Contact field is required </div>
                 </div>
             </div>
             <div class="form-group">
@@ -43,7 +45,24 @@
                         <span class="fas fa-plus-circle"></span></button></th>
                     </tr>
                     <tbody id="item_table">
-                    
+                    <tr>
+                        <td>
+                            <select class="form-control product_name" name="product_name[]" id="product_name">
+                                <option value="0" selected>Select Product</option>
+                                <option disabled>──────────</option>';
+                                <?php foreach($products as $row): ?><option value="<?php echo $row['product_id'];?>"><?php echo $row['product_name']; ?></option><?php endforeach ?>
+                            </select>
+                            <p class="invalid-feedback"> Product Name Field is required!! </p>
+                        </td>
+                        <td><input type="text" class="form-control total_qty" name="total_qty[]" disabled></td>
+                        <td>
+                            <input type="text" class="form-control product_qty" name="product_qty[]" id="product_qty">
+                            <p class="invalid-feedback"> Product Qty Field is required!! </p>
+                        </td>
+                        <td><input type="text" class="form-control price" name="price[]" readonly></td>
+                        <td>Php. <span class="total_price">0</span></td>';
+                        <td></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -107,13 +126,15 @@
         $(document).on('click', '.add', function(){
             var html = '';
             html += '<tr>';
-            html += '<td><select class="form-control product_name" name="product_name[]">';
+            html += '<td><select class="form-control product_name" name="product_name[]" id="product_name">';
             html += '<option value="0" selected>Select Product</option>';
             html += '<option disabled>──────────</option>';
             html += '<?php foreach($products as $row): ?><option value="<?php echo $row['product_id'];?>"><?php echo $row['product_name']; ?></option><?php endforeach ?>';
-            html += '</select></td>';
+            html += '</select>';
+            html += '<p class="invalid-feedback"> Product Name Field is required!! </p></td>'
             html += '<td><input type="text" class="form-control total_qty" name="total_qty[]" disabled></td>';
-            html += '<td><input type="text" class="form-control product_qty" name="product_qty[]"></td>';
+            html += '<td><input type="text" class="form-control product_qty" name="product_qty[]" id="product_qty">';
+            html += '<p class="invalid-feedback"> Product Qty Field is required!! </p></td>'
             html += '<td><input type="text" class="form-control price" name="price[]" readonly></td>';
             html += '<td>Php. <span class="total_price">0</span></td>';
             html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove">';
@@ -194,26 +215,75 @@
         // Multiple Insert
         $('#insert_form').on('submit', function(event){
             event.preventDefault();
-            var error = '';
-            $('.product_name').each(function(){
-                var count = 1;
-                if($(this).val() == ''){
-                    error +="<p>Enter Item Name at "+count+" Row</p>";
-                    return false;
-                }
-                count = count + 1;
-            });
-            $('.product_qty').each(function(){
-                var count = 1;
-                if($(this).val() == ''){
-                    error +="<p>Enter Item Quantity at "+count+" Row</p>";
-                    return false;
-                }
-                count = count + 1;
-            });
-            var form_data = $(this).serialize();
 
-            if(error == ''){
+            var orderDate = $('#order_date').val();
+            var customerName = $('#cus_name').val();
+            var customerContact = $('#cus_contact').val();
+            // form validation 
+			if(orderDate == "") {
+                $('#order_date').closest('.form-control').addClass('is-invalid');
+        
+			} else {
+                $('#order_date').closest('.form-control').removeClass('is-invalid');
+                $('#order_date').closest('.form-control').addClass('is-valid');
+            }
+
+            // form validation 
+			if(customerName == "") {
+                $('#cus_name').closest('.form-control').addClass('is-invalid');
+                
+			} else {
+                $('#cus_name').closest('.form-control').removeClass('is-invalid');
+                $('#cus_name').closest('.form-control').addClass('is-valid');
+            }
+
+            // form validation 
+			if(customerContact == "") {
+				$('#cus_contact').closest('.form-control').addClass('is-invalid');
+			} else {
+                $('#cus_contact').closest('.form-control').removeClass('is-invalid');
+                $('#cus_contact').closest('.form-control').addClass('is-valid');
+            }
+            // array validation
+			var productName = document.getElementsByName('product_name[]');				
+			var validateProduct;
+			for (var x = 0; x < productName.length; x++) {       			
+                if(productName[x].value == '0'){	    		    	
+                   $('.product_name').closest('.form-control').addClass('is-invalid');	    		    	    	
+                } else {
+                   $('.product_name').closest('.form-control').removeClass('is-invalid');      	
+                   $('.product_name').closest('.form-control').addClass('is-valid');	    		    		    	
+                }          
+            }
+            for (var x = 0; x < productName.length; x++) {       						
+                if(productName[x].value){	    		    		    	
+                    validateProduct = true;
+                } else {      	
+                    validateProduct = false;
+                }          
+            }
+
+             // array validation
+			var productQty = document.getElementsByName('product_qty[]');				
+			var validateProductQty;
+			for (var x = 0; x < productQty.length; x++){	    	
+                if(productQty[x].value == ''){	    		    	
+                    $('.product_qty').closest('.form-control').addClass('is-invalid');    		    	    	
+                }else{
+                    $('.product_qty').closest('.form-control').removeClass('is-invalid');      	
+                    $('.product_qty').closest('.form-control').addClass('is-valid');	    		    		    	
+                }          
+            }
+            for (var x = 0; x < productQty.length; x++) {       						
+                if(productQty[x].value){	    		    		    	
+                    validateProductQty = true;
+                } else {      	
+                    validateProductQty = false;
+                }          
+            }
+            
+            var form_data = $(this).serialize();
+            if((orderDate && customerName && customerContact) && (validateProduct == true && validateProductQty == true)){
                 $.ajax({
                     url: "<?php echo base_url() ?>orders/insert_order",
                     method: "POST",
@@ -223,6 +293,8 @@
                         if(response.success === true){
                             $("#insert_form")[0].reset();
                             $('#item_table > tr').empty();
+                            $("#order_date").datepicker("setDate", new Date());
+                            $("#insert_form .form-control").removeClass('is-invalid').removeClass('is-valid');
                             Swal.fire({
                                 title: 'Success',
                                 text: response.messages,
@@ -241,7 +313,7 @@
                     }
                 });
             }else{
-                $('#error').html('<div class="alert alert-danger">'+error+'</div>');
+                
             }
         });
     });
