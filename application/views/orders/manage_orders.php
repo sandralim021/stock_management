@@ -13,6 +13,7 @@
                     <table class="table table-bordered" id="order_data" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Customer Name</th>
                                 <th>Contact Number</th>
                                 <th>Order Date</th>
@@ -128,6 +129,11 @@
 				   url:"<?php echo base_url() . 'orders/fetch_orders'; ?>",  
 			   }
             });
+            //Reset Modal When Closed
+            $(".modal").on("hidden.bs.modal", function(){
+                $("#payment_form")[0].reset();
+                $("#payment_form .form-control").removeClass('is-invalid').removeClass('is-valid');
+            });
             // Payment Modal
 			$('#selected_data').on('click', '.payment-edit', function(){
                 var id = $(this).attr('data');
@@ -182,6 +188,7 @@
             $('#btn_save').click(function(){
                 var url = $('#payment_form').attr('action');
                 var data = $('#payment_form').serialize();
+                $(".invalid-feedback").remove();
                 $.ajax({
                     url: url,
                     data: data, // /converting the form data into array and sending it to server
@@ -211,6 +218,19 @@
                             $('#payment_modal').modal('hide');
                             // reset the form
                             $("#payment_form")[0].reset();
+                        }else{
+                            if(response.messages instanceof Object) {
+                                $.each(response.messages, function(index, value) {
+                                var id = $("#"+index);
+                                id.closest('.form-control')
+                                .removeClass('is-invalid')
+                                .removeClass('is-valid')
+                                .addClass(value.length > 0 ? 'is-invalid' : 'is-valid');
+                                
+                                id.after(value);
+
+                            });
+                            }
                         }
                     }
                 });

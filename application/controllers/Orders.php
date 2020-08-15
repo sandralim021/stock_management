@@ -26,6 +26,7 @@
         public function fetch_orders(){
             $result = array('data' => array());
             $data = $this->o_model->fetch_orders();
+            $i = 1;
             foreach ($data as $key => $value) {
                 // Select
                 $select = '';
@@ -44,6 +45,7 @@
                     $payment_status ='<span class="badge badge-danger">No Payment</span>';
                 }
                 $result['data'][$key] = array(
+                    $i++,
                     $value['customer_name'],
                     $value['customer_contact'],
                     $value['order_date'],
@@ -113,25 +115,37 @@
         }
 
         public function update_payment($id){
-            $data = array(
-                'order_date' => $this->input->post('order_date'),
-                'customer_name' => $this->input->post('cus_name'),
-                'customer_contact' => $this->input->post('cus_contact'),
-                'sub_total' => $this->input->post('sub_total'),
-                'discount' => $this->input->post('discount'),
-                'net_total' => $this->input->post('net_total'),
-                'paid' => $this->input->post('paid'),
-                'due' => $this->input->post('due'),
-                'payment_type' => $this->input->post('payment_type')
-            );
-            $update = $this->o_model->update_payment($data,$id);
-            if($update == true) {
-                $response['success'] = true;
-                $response['messages'] = 'Succesfully updated';
-            }
-            else {
+            $this->form_validation->set_rules('order_date', 'Order Date', 'trim|required');
+            $this->form_validation->set_rules('cus_name', 'Customer Name', 'trim|required');
+            $this->form_validation->set_rules('cus_contact', 'Customer Contact', 'trim|required');
+            $this->form_validation->set_error_delimiters('<div class="invalid-feedback">','</div>');
+
+            if ($this->form_validation->run() == TRUE) {
+                $data = array(
+                    'order_date' => $this->input->post('order_date'),
+                    'customer_name' => $this->input->post('cus_name'),
+                    'customer_contact' => $this->input->post('cus_contact'),
+                    'sub_total' => $this->input->post('sub_total'),
+                    'discount' => $this->input->post('discount'),
+                    'net_total' => $this->input->post('net_total'),
+                    'paid' => $this->input->post('paid'),
+                    'due' => $this->input->post('due'),
+                    'payment_type' => $this->input->post('payment_type')
+                );
+                $update = $this->o_model->update_payment($data,$id);
+                if($update == true) {
+                    $response['success'] = true;
+                    $response['messages'] = 'Succesfully updated';
+                }
+                else {
+                    $response['success'] = false;
+                    $response['messages'] = 'Error in the database while updated the Payment information';			
+                }
+            }else{
                 $response['success'] = false;
-                $response['messages'] = 'Error in the database while updated the Payment information';			
+                foreach ($_POST as $key => $value) {
+                    $response['messages'][$key] = form_error($key);
+                }
             }
             echo json_encode($response);
         }
