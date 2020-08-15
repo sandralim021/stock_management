@@ -44,15 +44,21 @@
                 <form action="" method="post" id="payment_form">
                     <input type="hidden" name="order_id" id="order_id" value="0">
                         <div class="form-group row">
-                        <label for="order_name" class="col-sm-2 col-form-label">Order Date</label>
+                        <label for="order_name" class="col-sm-4 col-form-label">Order Date</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="order_date" name="order_date" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="order_name" class="col-sm-2 col-form-label">Customer Name</label>
+                        <label for="cus_name" class="col-sm-4 col-form-label">Customer Name</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="cus_name" name="cus_name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="cus_contact" class="col-sm-4 col-form-label">Customer Contact</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="cus_contact" name="cus_contact">
                         </div>
                     </div>
                     <hr>
@@ -110,6 +116,12 @@
     <!-- /.container-fluid -->
     <script type="text/javascript" language="javascript">
          $(document).ready(function(){
+             //Date Picker
+            $('#order_date').datepicker({
+                "autoclose": true,
+                "format": 'yy-mm-dd',
+            });
+            $("#order_date").datepicker("setDate", new Date());
             var dataTable = $('#order_data').DataTable({
 			   "order":[],
 			   "ajax":{
@@ -128,6 +140,9 @@
                     async: false,
                     dataType: 'json',
                     success: function(data){
+                        $('input[name=order_date]').val(data.order_date);
+                        $('input[name=cus_name]').val(data.customer_name);
+                        $('input[name=cus_contact]').val(data.customer_contact);
                         $('input[name=order_id]').val(data.order_id);
                         $('input[name=sub_total]').val(data.sub_total);
                         $('input[name=discount]').val(data.discount);

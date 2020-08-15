@@ -114,6 +114,9 @@
 
         public function update_payment($id){
             $data = array(
+                'order_date' => $this->input->post('order_date'),
+                'customer_name' => $this->input->post('cus_name'),
+                'customer_contact' => $this->input->post('cus_contact'),
                 'sub_total' => $this->input->post('sub_total'),
                 'discount' => $this->input->post('discount'),
                 'net_total' => $this->input->post('net_total'),
