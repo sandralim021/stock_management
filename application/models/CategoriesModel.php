@@ -2,7 +2,8 @@
 class CategoriesModel extends CI_Model {
 
     public function get_entries(){
-        $query = $this->db->get('categories');
+        $query = $this->db->where('cat_status',1)
+                        ->get('categories');
         return $query->result_array();
     }
 
@@ -32,8 +33,21 @@ class CategoriesModel extends CI_Model {
     }
 
     public function delete_entry($id){
-        $delete = $this->db->delete('categories', array('category_id' => $id));
+        $delete = $this->db->set('cat_status',0)
+                        ->where('category_id',$id)
+                        ->update('categories');
+
         return ($delete) ? true : false;
+    }
+
+    // Check category exists
+    public function check_category_exists($category){
+        $query = $this->db->get_where('categories', array('category_name' => $category, 'cat_status' => 1));
+        if(empty($query->row_array())){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

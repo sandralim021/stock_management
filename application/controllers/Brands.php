@@ -23,13 +23,13 @@ class Brands extends CI_Controller {
     public function insert(){
         $response = array();
 
-        $this->form_validation->set_rules('brand_name', 'Brand name', 'trim|required|is_unique[brands.brand_name]');
+        $this->form_validation->set_rules('brand_name', 'Brand name', 'trim|required|callback_check_brand_exists');
         $this->form_validation->set_error_delimiters('<div class="invalid-feedback">','</div>');
 
         if ($this->form_validation->run() == TRUE) {
             $data = array(
                 'brand_name' => $this->input->post('brand_name'),
-                'brand_status' => $this->input->post('brand_status')
+                'brand_status' => 1
             );
             $create = $this->b_model->insert_entry($data);
             if($create == true) {
@@ -53,16 +53,17 @@ class Brands extends CI_Controller {
 
     public function fetch(){
         $result = array('data' => array());
+        $i = 1;
         $data = $this->b_model->get_entries();
         foreach ($data as $key => $value) {
-            // button
+            // Select
             $buttons = '';
-            $buttons .= '<button class="btn btn-sm btn-outline-info item-edit" data='.$value['brand_id'].'><i class="fas fa-edit"></i></button>';
-            $buttons .= '<button class="btn btn-sm btn-outline-danger item-delete" data='.$value['brand_id'].'><i class="fas fa-trash-alt"></i></button>';
+            $buttons .= '<button type="button" class="btn btn-sm btn-info mr-1 item-edit" data='.$value['brand_id'].'><i class="fas fa-edit"></i></button>';
+            $buttons .= '<button type="button" class="btn btn-sm btn-danger item-delete" data='.$value['brand_id'].'><i class="fas fa-trash-alt"></i></button>';
             $status = ($value['brand_status'] == '1') ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-warning">Not Active</span>';
             $result['data'][$key] = array(
+                $i++,
                 $value['brand_name'],
-                $status,
                 $buttons
             );
         }   // /foreach
@@ -78,7 +79,7 @@ class Brands extends CI_Controller {
         $brand_db = $this->b_model->single_entry($id);
         $brand_name = $this->input->post('brand_name');
         if($brand_db->brand_name != $brand_name){
-            $is_unique = 'trim|required|is_unique[brands.brand_name]';
+            $is_unique = 'trim|required|callback_check_brand_exists';
         }else{
             $is_unique = 'trim|required';
         }
@@ -89,7 +90,6 @@ class Brands extends CI_Controller {
         if($this->form_validation->run() == TRUE){
             $data = array(
                 'brand_name' => $this->input->post('brand_name'),
-                'brand_status' => $this->input->post('brand_status')
             );
             $update = $this->b_model->update_entry($data,$id);
             if($update == true) {
@@ -121,7 +121,7 @@ class Brands extends CI_Controller {
             }
             else {
                 $response['success'] = false;
-                $response['messages'] = "Error in the database while removing the category information";
+                $response['messages'] = "Error in the database while removing the brand information";
             }
         }
         else {
@@ -130,6 +130,15 @@ class Brands extends CI_Controller {
         }
 
         echo json_encode($response);
+    }
+
+    public function check_brand_exists($brand){
+        $this->form_validation->set_message('check_brand_exists', 'That brand name is taken. Please choose a different one');
+        if($this->b_model->check_brand_exists($brand)){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

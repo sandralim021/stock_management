@@ -24,12 +24,12 @@ class Products extends CI_Controller {
     public function fetch(){
         $result = array('data' => array());
         $data = $this->p_model->get_entries();
+        $i = 1;
         foreach ($data as $key => $value) {
             // button
             $buttons = '';
-            $buttons .= '<button class="btn btn-sm btn-outline-info item-edit" data='.$value['product_id'].'><i class="fas fa-edit"></i></button>';
-            $buttons .= '<button class="btn btn-sm btn-outline-danger item-delete" data='.$value['product_id'].'><i class="fas fa-trash-alt"></i></button>';
-            $status = ($value['prod_status'] == '1') ? '<span class="badge badge-success">Available</span>' : '<span class="badge badge-warning">Not Available</span>';
+            $buttons .= '<button class="btn btn-sm btn-info mr-1 item-edit" data='.$value['product_id'].'><i class="fas fa-edit"></i></button>';
+            $buttons .= '<button class="btn btn-sm btn-danger item-delete" data='.$value['product_id'].'><i class="fas fa-trash-alt"></i></button>';
             $qty_status = '';
             if($value['qty'] < $value['alert_qty']){
                 $qty_status = '<span class="badge badge-warning">Critical stock !</span>';
@@ -38,13 +38,13 @@ class Products extends CI_Controller {
             }
             // Displaying Data
             $result['data'][$key] = array(
+                $i++,
+                $value['product_name'],
                 $value['brand_name'],
                 $value['category_name'],
-                $value['product_name'],
                 $value['qty'].' '.$qty_status,
                 $value['alert_qty'],
                 "₱ ".number_format($value['price'], 2),
-                $status,
                 $buttons
             );
         }   // /foreach
@@ -69,7 +69,7 @@ class Products extends CI_Controller {
                 'qty' => $this->input->post('qty'),
                 'alert_qty' => $this->input->post('alert_qty'),
                 'price' => $this->input->post('price'),
-                'prod_status' => $this->input->post('prod_status')
+                'prod_status' => 1
             );
             $create = $this->p_model->insert_entry($data);
             if($create == true) {
@@ -113,7 +113,6 @@ class Products extends CI_Controller {
                 'qty' => $this->input->post('qty'),
                 'alert_qty' => $this->input->post('alert_qty'),
                 'price' => $this->input->post('price'),
-                'prod_status' => $this->input->post('prod_status')
             );
             $update = $this->p_model->update_entry($data,$id);
             if($update == true) {

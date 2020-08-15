@@ -6,6 +6,7 @@ class ProductsModel extends CI_Model {
                         ->from('products')
                         ->join('brands','brands.brand_id = products.brand_id','left')
                         ->join('categories','categories.category_id = products.category_id','left')
+                        ->where('products.prod_status',1)
                         ->get();
         
         return $query->result_array();
@@ -52,7 +53,10 @@ class ProductsModel extends CI_Model {
     }
 
     public function delete_entry($id){
-        $delete = $this->db->delete('products', array('product_id' => $id));
+        $delete = $this->db->set('prod_status',0)
+                        ->where('product_id',$id)
+                        ->update('products');
+
         return ($delete) ? true : false;
     }
 

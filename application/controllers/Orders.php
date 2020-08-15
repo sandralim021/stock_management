@@ -27,7 +27,7 @@
             $result = array('data' => array());
             $data = $this->o_model->fetch_orders();
             foreach ($data as $key => $value) {
-                // button
+                // Select
                 $select = '';
                 $select .= '<div class="dropdown">';
                 $select .= '<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>';

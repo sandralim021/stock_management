@@ -2,7 +2,8 @@
 class BrandsModel extends CI_Model {
 
     public function get_entries(){
-        $query = $this->db->get('brands');
+        $query = $this->db->where('brand_status',1)
+                        ->get('brands');
         return $query->result_array();
     }
 
@@ -31,8 +32,21 @@ class BrandsModel extends CI_Model {
     }
 
     public function delete_entry($id){
-        $delete = $this->db->delete('brands', array('brand_id' => $id));
+        $delete = $this->db->set('brand_status',0)
+                        ->where('brand_id',$id)
+                        ->update('brands');
+    
         return ($delete) ? true : false;
+    }
+
+    // Check brand exists
+    public function check_brand_exists($brand){
+        $query = $this->db->get_where('brands', array('brand_name' => $brand, 'brand_status' => 1));
+        if(empty($query->row_array())){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

@@ -101,25 +101,10 @@
         </div>
       </li>
        <!-- Nav Item - Reports -->
-       <li class="nav-item <?php if($this->uri->segment(1)=="reports"){echo "active";}?>">
+      <li class="nav-item <?php if($this->uri->segment(1)=="reports"){echo "active";}?>">
         <a class="nav-link" href="<?php echo base_url() ?>reports">
           <i class="fas fa-chart-bar" aria-hidden="true"></i>
           <span>Reports</span></a>
-      </li>
-      <!-- Nav Item - Orders -->
-      <li class="nav-item <?php if($this->uri->segment(1)=="archives"){echo "active";}?>">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_archive_pages" aria-expanded="true" aria-controls="collapse_archive_pages">
-          <i class="fas fa-archive"></i>
-          <span>Archives</span>
-        </a>
-        <div id="collapse_archive_pages" class="collapse <?php if($this->uri->segment(1)=="archives"){echo "show";}?>" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Archive Options:</h6>
-            <a class="collapse-item <?php if($this->uri->segment(2)=="brand_archive"){echo "active";}?>" href="<?php echo base_url() ?>archives/brand_archive">Brand Archives</a>
-            <a class="collapse-item <?php if($this->uri->segment(2)=="category_archive"){echo "active";}?>" href="<?php echo base_url() ?>archives/category_archive">Category Archives</a>
-            <a class="collapse-item <?php if($this->uri->segment(2)=="product_archive"){echo "active";}?>" href="<?php echo base_url() ?>archives/product_archive">Product Archives</a>
-          </div>
-        </div>
       </li>
 
     </ul>

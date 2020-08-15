@@ -16,13 +16,13 @@
                     <table class="table table-bordered" id="product_data" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>#</th>
+                                <th>Product Name</th>
                                 <th>Brand</th>
                                 <th>Category</th>
-                                <th>Product Name</th>
                                 <th width="10%">Quantity</th>
                                 <th width="15%">Alert Quantity</th>
                                 <th>Price</th>
-                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -87,13 +87,6 @@
                         <div class="form-group col-md-6">
                             <label for="">Product Price</label>
                             <input type="number" class="form-control" id="price" name="price">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="status">Status</label>
-                            <select class="form-control" id="prod_status" name="prod_status">
-                                    <option value="0">Not Available</option>
-                                    <option value="1">Available</option>
-                            </select>
                         </div>
                     </div>
                 </form>

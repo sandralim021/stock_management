@@ -91,7 +91,3 @@ $route['orders/update_payment/(:any)'] = 'orders/update_payment/$1';
 $route['orders/invoice/(:any)'] = 'orders/invoice/$1';
 //Reports
 $route['reports'] = 'reports/index';
-//Archives
-$route['archives/brand_archive'] = 'archives/brand_archive';
-$route['archives/category_archive'] = 'archives/category_archive';
-$route['archives/product_archive'] = 'archives/product_archive';

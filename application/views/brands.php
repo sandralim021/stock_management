@@ -16,8 +16,8 @@
                     <table class="table table-bordered" id="brand_data" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Brand Name</th>
-                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -47,13 +47,6 @@
                     <div class="form-group">
                         <label for="">Brand Name</label>
                         <input type="text" class="form-control" id="brand_name" name="brand_name" placeholder="Enter Brand Name">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Status</label>
-                        <select name="brand_status" class="form-control" id="brand_status">
-                            <option value="0">Not Active</option>
-                            <option value="1">Active</option>
-                        </select>
                     </div>
                 </form>
             </div>
@@ -174,7 +167,6 @@
                     success: function(data){
                         $('input[name=brand_id]').val(data.brand_id);
                         $('input[name=brand_name]').val(data.brand_name);
-                        $('select[name=brand_status]').val(data.brand_status);
                     },
                     error: function(){
                         alert('Could not Edit Data');

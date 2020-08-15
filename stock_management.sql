@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2020 at 11:26 AM
+-- Generation Time: Aug 15, 2020 at 09:54 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -180,7 +180,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `fname`, `lname`, `email`, `username`, `password`) VALUES
-(1, 'Kassandra', 'Lim', 'kaycee@gmail.com', 'kaycee', 'e82cee85ef61260f0a45e4d60a10ae46');
+(1, 'Kassandra', 'Montefalco', 'kaycee@gmail.com', 'kokushime', '85db70ce0b875fb699855657b0c045d7');
 
 --
 -- Indexes for dumped tables
@@ -190,15 +190,13 @@ INSERT INTO `users` (`user_id`, `fname`, `lname`, `email`, `username`, `password
 -- Indexes for table `brands`
 --
 ALTER TABLE `brands`
-  ADD PRIMARY KEY (`brand_id`),
-  ADD UNIQUE KEY `brand_name` (`brand_name`);
+  ADD PRIMARY KEY (`brand_id`);
 
 --
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`category_id`),
-  ADD UNIQUE KEY `category_name` (`category_name`);
+  ADD PRIMARY KEY (`category_id`);
 
 --
 -- Indexes for table `orders`

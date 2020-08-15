@@ -16,8 +16,8 @@
                     <table class="table table-bordered" id="category_data" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Category Name</th>
-                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -47,13 +47,6 @@
                     <div class="form-group">
                         <label for="">Category Name</label>
                         <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Enter Category Name">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Status</label>
-                        <select name="cat_status" class="form-control" id="cat_status">
-                            <option value="0">Not Active</option>
-                            <option value="1">Active</option>
-                        </select>
                     </div>
                 </form>
             </div>
