@@ -33,6 +33,7 @@
             </div>
             <div class="form-group">
                 <label for="#" class="col-form-label">Select Products</label>
+                <span id="error"></span>
                 <table class="table table-bordered">
                     <tr>
                         <th width="30%">Enter Product Name</th>
@@ -49,18 +50,16 @@
                         <td>
                             <select class="form-control product_name" name="product_name[]" id="product_name">
                                 <option value="0" selected>Select Product</option>
-                                <option disabled>──────────</option>';
+                                <option disabled>──────────</option>
                                 <?php foreach($products as $row): ?><option value="<?php echo $row['product_id'];?>"><?php echo $row['product_name']; ?></option><?php endforeach ?>
                             </select>
-                            <p class="invalid-feedback"> Product Name Field is required!! </p>
                         </td>
                         <td><input type="text" class="form-control total_qty" name="total_qty[]" disabled></td>
                         <td>
                             <input type="text" class="form-control product_qty" name="product_qty[]" id="product_qty">
-                            <p class="invalid-feedback"> Product Qty Field is required!! </p>
                         </td>
                         <td><input type="text" class="form-control price" name="price[]" readonly></td>
-                        <td>Php. <span class="total_price">0</span></td>';
+                        <td>Php. <span class="total_price">0</span></td>
                         <td></td>
                     </tr>
                     </tbody>
@@ -247,14 +246,6 @@
             // array validation
 			var productName = document.getElementsByName('product_name[]');				
 			var validateProduct;
-			for (var x = 0; x < productName.length; x++) {       			
-                if(productName[x].value == '0'){	    		    	
-                   $('.product_name').closest('.form-control').addClass('is-invalid');	    		    	    	
-                } else {
-                   $('.product_name').closest('.form-control').removeClass('is-invalid');      	
-                   $('.product_name').closest('.form-control').addClass('is-valid');	    		    		    	
-                }          
-            }
             for (var x = 0; x < productName.length; x++) {       						
                 if(productName[x].value){	    		    		    	
                     validateProduct = true;
@@ -262,24 +253,19 @@
                     validateProduct = false;
                 }          
             }
-
              // array validation
 			var productQty = document.getElementsByName('product_qty[]');				
 			var validateProductQty;
-			for (var x = 0; x < productQty.length; x++){	    	
-                if(productQty[x].value == ''){	    		    	
-                    $('.product_qty').closest('.form-control').addClass('is-invalid');    		    	    	
-                }else{
-                    $('.product_qty').closest('.form-control').removeClass('is-invalid');      	
-                    $('.product_qty').closest('.form-control').addClass('is-valid');	    		    		    	
-                }          
-            }
             for (var x = 0; x < productQty.length; x++) {       						
                 if(productQty[x].value){	    		    		    	
                     validateProductQty = true;
                 } else {      	
                     validateProductQty = false;
                 }          
+            }
+
+            if(validateProduct == false || validateProductQty == false){
+                $('#error').html('<div class="alert alert-danger">Please Fill Up All Product Information On The Table</div>');
             }
             
             var form_data = $(this).serialize();
@@ -295,6 +281,7 @@
                             $('#item_table > tr').empty();
                             $("#order_date").datepicker("setDate", new Date());
                             $("#insert_form .form-control").removeClass('is-invalid').removeClass('is-valid');
+                            $('#error').html('');
                             Swal.fire({
                                 title: 'Success',
                                 text: response.messages,
