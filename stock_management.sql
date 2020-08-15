@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 15, 2020 at 09:54 AM
+-- Generation Time: Aug 15, 2020 at 04:17 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -40,12 +40,12 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`brand_id`, `brand_name`, `brand_status`) VALUES
-(1, 'Brand 1', 0),
-(2, 'Brand 2', 0),
+(1, 'Brand 1', 1),
+(2, 'Brand 2', 1),
 (3, 'Brand 3', 1),
 (4, 'Brand 4', 1),
 (5, 'Brand 5', 1),
-(6, 'Brand 6', 0);
+(6, 'Brand 6', 1);
 
 -- --------------------------------------------------------
 
@@ -66,9 +66,9 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`category_id`, `category_name`, `cat_status`) VALUES
 (1, 'Category 1', 1),
 (2, 'Category 2', 1),
-(3, 'Category 3', 0),
-(4, 'Category 4', 0),
-(5, 'Category 5', 0),
+(3, 'Category 3', 1),
+(4, 'Category 4', 1),
+(5, 'Category 5', 1),
 (6, 'Category 6', 1);
 
 -- --------------------------------------------------------
@@ -155,9 +155,9 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`product_id`, `brand_id`, `category_id`, `product_name`, `qty`, `alert_qty`, `price`, `prod_status`) VALUES
 (1, 4, 1, 'Product 1', 90, 10, '1400', 1),
 (2, 5, 2, 'Product 2', 130, 20, '600', 1),
-(3, 3, 6, 'Product 3', 140, 15, '200', 0),
+(3, 3, 6, 'Product 3', 140, 15, '200', 1),
 (4, 4, 2, 'Product 4', 170, 10, '300', 1),
-(5, 4, 2, 'Product 5', 60, 5, '800', 0),
+(5, 4, 2, 'Product 5', 60, 5, '800', 1),
 (6, 3, 6, 'Product 6', 150, 10, '400', 1);
 
 -- --------------------------------------------------------
