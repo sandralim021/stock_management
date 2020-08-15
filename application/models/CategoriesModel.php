@@ -3,6 +3,7 @@ class CategoriesModel extends CI_Model {
 
     public function get_entries(){
         $query = $this->db->where('cat_status',1)
+                        ->order_by('category_name','ASC')
                         ->get('categories');
         return $query->result_array();
     }

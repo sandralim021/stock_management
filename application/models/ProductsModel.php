@@ -7,6 +7,7 @@ class ProductsModel extends CI_Model {
                         ->join('brands','brands.brand_id = products.brand_id','left')
                         ->join('categories','categories.category_id = products.category_id','left')
                         ->where('products.prod_status',1)
+                        ->order_by('product_name','ASC')
                         ->get();
         
         return $query->result_array();
@@ -14,6 +15,7 @@ class ProductsModel extends CI_Model {
     }
     public function get_brands(){
         $query = $this->db->where('brand_status','1')
+                        ->order_by('brand_name','ASC')
                         ->get('brands');
 
         return $query->result_array();
@@ -21,6 +23,7 @@ class ProductsModel extends CI_Model {
 
     public function get_categories(){
         $query = $this->db->where('cat_status','1')
+                        ->order_by('category_name','ASC')
                         ->get('categories');
 
         return $query->result_array();

@@ -43,6 +43,19 @@
             <div class="modal-body">
                 <form action="" method="post" id="payment_form">
                     <input type="hidden" name="order_id" id="order_id" value="0">
+                        <div class="form-group row">
+                        <label for="order_name" class="col-sm-2 col-form-label">Order Date</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="order_date" name="order_date" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="order_name" class="col-sm-2 col-form-label">Customer Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="cus_name" name="cus_name">
+                        </div>
+                    </div>
+                    <hr>
                     <div class="form-group row">
                         <label for="" class="col-sm-4 col-form-label">Sub Total</label>
                         <div class="col-sm-6">

@@ -3,6 +3,7 @@
         
         public function get_products(){
             $query = $this->db->where('prod_status','1')
+                            ->order_by('product_name','ASC')
                             ->get('products');
 
             return $query->result_array();
@@ -36,6 +37,7 @@
             $query = $this->db
                      ->select('*')
                      ->from('orders')
+                     ->order_by('order_date','DESC')
                      ->get();
         
             return $query->result_array();

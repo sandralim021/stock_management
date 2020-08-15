@@ -3,6 +3,7 @@ class BrandsModel extends CI_Model {
 
     public function get_entries(){
         $query = $this->db->where('brand_status',1)
+                        ->order_by('brand_name','ASC')
                         ->get('brands');
         return $query->result_array();
     }
