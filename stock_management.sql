@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 15, 2020 at 04:17 PM
+-- Generation Time: Oct 05, 2020 at 04:49 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `stock_management`
 --
-CREATE DATABASE IF NOT EXISTS `stock_management` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `stock_management`;
 
 -- --------------------------------------------------------
 
@@ -95,10 +93,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `customer_name`, `customer_contact`, `order_date`, `sub_total`, `discount`, `net_total`, `paid`, `due`, `payment_type`) VALUES
-(1, 'Ericka Velasquez', '09497771100', '2020-08-08', 5400, 5, 5130, 5130, 0, 'Cash'),
-(2, 'Kaycee Lim', '09274302437', '2020-08-14', 10400, 0, 10400, 1000, 9400, 'Cash'),
-(3, 'John Doe', '099999999', '2020-07-30', 6400, 5, 6080, 0, 6080, 'Cash'),
-(4, 'Fatima Lim', '09065067156', '2020-08-01', 20800, 10, 18720, 18720, 0, 'Card');
+(1, 'Alma Rodriguez', '09283920102', '2020-10-05', 7200, 10, 6480, 6480, 0, 'Cash');
 
 -- --------------------------------------------------------
 
@@ -119,17 +114,8 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`od_id`, `order_id`, `product_id`, `price`, `qty`) VALUES
-(1, 1, 1, 1400, 3),
-(2, 1, 4, 300, 4),
-(3, 2, 4, 300, 8),
-(4, 2, 6, 400, 5),
-(5, 2, 2, 600, 10),
-(6, 3, 4, 300, 8),
-(7, 3, 6, 400, 10),
-(8, 4, 1, 1400, 7),
-(9, 4, 2, 600, 10),
-(10, 4, 4, 300, 10),
-(11, 4, 6, 400, 5);
+(1, 1, 2, 600, 5),
+(2, 1, 1, 1400, 3);
 
 -- --------------------------------------------------------
 
@@ -153,12 +139,12 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `brand_id`, `category_id`, `product_name`, `qty`, `alert_qty`, `price`, `prod_status`) VALUES
-(1, 4, 1, 'Product 1', 90, 10, '1400', 1),
-(2, 5, 2, 'Product 2', 130, 20, '600', 1),
+(1, 4, 1, 'Product 1', 97, 10, '1400', 1),
+(2, 5, 2, 'Product 2', 121, 20, '600', 1),
 (3, 3, 6, 'Product 3', 140, 15, '200', 1),
 (4, 4, 2, 'Product 4', 170, 10, '300', 1),
-(5, 4, 2, 'Product 5', 60, 5, '800', 1),
-(6, 3, 6, 'Product 6', 150, 10, '400', 1);
+(5, 4, 2, 'Product 5', 80, 5, '800', 1),
+(6, 3, 6, 'Product 6', 147, 10, '400', 1);
 
 -- --------------------------------------------------------
 
@@ -180,7 +166,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `fname`, `lname`, `email`, `username`, `password`) VALUES
-(1, 'Kassandra', 'Montefalco', 'kaycee@gmail.com', 'kokushime', '85db70ce0b875fb699855657b0c045d7');
+(1, 'Admin', 'Brown', 'admin@gmail.com', 'admin', '0192023a7bbd73250516f069df18b500');
 
 --
 -- Indexes for dumped tables
@@ -242,13 +228,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `products`
