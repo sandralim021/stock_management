@@ -2,11 +2,7 @@
 
 Stock Management System allows the user to track the products and orders. It also have categories and brands that user can manage and the user can generate reports.
 
-Development is on going but still you can download and clone it already.
-
-## Programming Languages
-
-This project is developed by Bootstrap, Jquery and Codeigniter 3 Framework.
+I built this using Bootstrap, Jquery and Codeigniter 3 Framework.
 
 ## Screenshots
 ### Login
