@@ -5,6 +5,18 @@ Stock Management System allows the user to track the products and orders. It als
 ## Programming Technologies
 This project is built using Bootstrap, Jquery and Codeigniter 3 Framework.
 
+## Installation
+* Clone the repo ` https://github.com/sandralim021/stock_management.git ` or download it.
+* Upload this project files and folders to your server.
+* Create database to your server and import `stock_management.sql`.
+* Open the `application/config/database.php` file and set your database settings.
+* <b>Note: </b> If you want to rename the folder, Open the `application/config/config.php` file and set your base URL.
+* Done! Now you can run the website!
+
+## Credentials For Admin
+Username: admin\
+Password: admin123
+
 ## Screenshots
 ### Login
 ![Login](screenshots/01.%20login.PNG)
